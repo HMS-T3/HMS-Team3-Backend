@@ -1,6 +1,10 @@
+"use strict";
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+
 const app = express();
 
 app.use(cors());
@@ -25,21 +29,40 @@ app.use(
   })
 );
 
+mongoose.set("strictQuery", false);
+mongoose
+  .connect(
+    `mongodb+srv://${process.env.USERNAME_MONGO}:${process.env.PASSWORD_MONGO}@${process.env.CLUSTER_MONGO}/?retryWrites=true&w=majority`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(() => {
+    console.log("Connected to database");
+  })
+  .catch((err) => {
+    console.log("Error connecting to database", err);
+  });
+
 const routes = require("./router/router.js");
 
 app.use("*", (req, res, next) => {
-  console.log([
+  console.log(
     [
-      "Request received at : ",
-      req.url,
-      req.method,
-      req.body,
-      req.params,
-      req.query,
-      req.headers,
-      res.statusCode,
+      [
+        "Request received at : ",
+        req.url,
+        req.method,
+        req.body,
+        req.params,
+        req.query,
+        req.headers,
+        res.statusCode,
+      ],
     ],
-  ]);
+    "\n"
+  );
   next();
 });
 
