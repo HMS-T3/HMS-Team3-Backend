@@ -1,29 +1,34 @@
 const mongoose = require("mongoose");
 
 const user = new mongoose.Schema({
-  phoneNumber: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 7,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  firstName: {
+  role: {
     type: String,
   },
-  lastName: {
-    type: String,
-  },
-  profilePicture: {
-    type: String,
+  info: {
+    name: {
+        type: String,
+    },
+    dateOfBirth: {
+        type: Date,
+        trim: true,
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    email: {
+      type: String,
+    },
+    biologicalGender: {
+      type: String,
+    },
+    records: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "healthRecords",
+      },
+    ],
   },
 });
-
 module.exports = mongoose.model("users", user);
