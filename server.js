@@ -29,10 +29,11 @@ app.use(
   })
 );
 
+const database = "HMS-T3";
 mongoose.set("strictQuery", false);
 mongoose
   .connect(
-    `mongodb+srv://${process.env.USERNAME_MONGO}:${process.env.PASSWORD_MONGO}@${process.env.CLUSTER_MONGO}/?retryWrites=true&w=majority`,
+    `mongodb+srv://${process.env.USERNAME_MONGO}:${process.env.PASSWORD_MONGO}@${process.env.CLUSTER_MONGO}/${database}`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -47,19 +48,20 @@ mongoose
 
 const routes = require("./router/router.js");
 
+let defaultConsoleLogCounter = 1;
+
 app.use("*", (req, res, next) => {
-  console.log(
+  console.warn(
+    `${defaultConsoleLogCounter++}.)`,
     [
-      [
-        "Request received at : ",
-        req.url,
-        req.method,
-        req.body,
-        req.params,
-        req.query,
-        req.headers,
-        res.statusCode,
-      ],
+      ` Request received at : `,
+      req.url,
+      req.method,
+      req.body,
+      req.params,
+      req.query,
+      // req.headers,
+      res.statusCode,
     ],
     "\n"
   );

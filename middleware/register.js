@@ -3,8 +3,8 @@ const enums = require("../enums/enum");
 
 module.exports.patient = async (req, res) => {};
 
-module.exports.doctor = async (req, res) => {
-  const { email, password } = req.body;
+module.exports.staff = async (req, res) => {
+  const { email, password, role } = req.body;
   // console.log("here");
   if (password.length < 7) {
     return res
@@ -25,7 +25,7 @@ module.exports.doctor = async (req, res) => {
   await new User({
     email: email,
     password: password,
-    role: enums.role_doctor,
+    role: role,
   })
     .save()
     .then((r) => res.status(200).json({ msg: "Welcome to the club!" }))
@@ -38,6 +38,8 @@ module.exports.doctor = async (req, res) => {
             .status(500)
             .json({ msg: "Error registering new user please try again." });
         }
+      } else {
+        res.status(200).json({ msg: "Welcome to the club!" });
       }
     });
 };

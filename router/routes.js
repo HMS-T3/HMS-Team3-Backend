@@ -1,7 +1,7 @@
 module.exports = {
   root: "/",
   loginPatient: "/login/patient",
-  loginDoctor: "/login/doctor",
-  registerDoctor: "/register/doctor",
+  loginStaff: "/login/staff",
+  registerStaff: "/register/staff",
   registerPatient: "/register/patient",
 };

@@ -26,7 +26,7 @@ module.exports.patient = async (req, res) => {
   //   });
 };
 
-module.exports.doctor = async (req, res) => {
+module.exports.staff = async (req, res) => {
   const { email, password, role } = req.body;
   if (password.length < 7) {
     return res
@@ -35,7 +35,7 @@ module.exports.doctor = async (req, res) => {
   }
   const userFound = await User.findOne({
     email: email,
-    role: enums.role_doctor,
+    role: role,
   })
     .exec()
     .then((user) => {
