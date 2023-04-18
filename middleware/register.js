@@ -5,7 +5,6 @@ module.exports.patient = async (req, res) => {};
 
 module.exports.staff = async (req, res) => {
   const { email, password, role } = req.body;
-  // console.log("here");
   if (password.length < 7) {
     return res
       .status(200)

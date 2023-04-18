@@ -4,10 +4,6 @@ const middleware = require("../middleware/middleware");
 const routes = require("./routes");
 var path = require("path");
 
-// //get routes
-// router.get(routes.root, middleware.home);
-
-//post routes
 router
   .get(routes.root, middleware.home)
   .post(routes.loginPatient, middleware.login_patient)

@@ -60,7 +60,6 @@ app.use("*", (req, res, next) => {
       req.body,
       req.params,
       req.query,
-      // req.headers,
       res.statusCode,
     ],
     "\n"
