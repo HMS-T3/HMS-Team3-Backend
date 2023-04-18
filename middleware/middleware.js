@@ -7,7 +7,7 @@ const middleware = {
   login_patient: login.patient,
   login_doctor: login.doctor,
   register_patient: register.patient,
-  register_doctor: register.doctor,
+  register_staff: register.staff,
 };
 
 module.exports = middleware;
