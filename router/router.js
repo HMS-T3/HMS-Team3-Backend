@@ -9,6 +9,7 @@ var path = require("path");
 
 //post routes
 router
+  .get(routes.root, middleware.home)
   .post(routes.loginPatient, middleware.login_patient)
   .post(routes.loginDoctor, middleware.login_doctor)
   .post(routes.registerDoctor, middleware.register_doctor)
