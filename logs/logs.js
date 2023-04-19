@@ -9,6 +9,7 @@ module.exports = {
   8: "Error logging in",
   9: "Username already exists",
   10: "Error registering new user please try again.",
+  11: "Wrong Email",
   pass: true,
   fail: false,
 };
