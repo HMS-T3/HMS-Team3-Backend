@@ -1,5 +1,6 @@
 const User = require("../models.js").User;
 const enums = require("../enums/enum");
+const hash = require("../functions/hash");
 
 module.exports.patient = async (req, res) => {
   // const { username, password, role } = req.body;
@@ -33,14 +34,16 @@ module.exports.staff = async (req, res) => {
       .status(200)
       .json({ msg: "Password must be at least 8 characters long" });
   }
-  const userFound = await User.findOne({
+  const hashed_password = await hash(password);
+  await User.findOne({
     email: email,
     role: role,
   })
     .exec()
     .then((user) => {
       if (user) {
-        if (user.password === password) {
+        // const hashed_password = await hash(password);
+        if (user.password === hashed_password) {
           return res.status(200).json({ msg: "Welcome back!" });
         } else {
           return res.status(200).json({ msg: "Wrong Password" });

@@ -1,5 +1,6 @@
 const User = require("../models.js").User;
 const enums = require("../enums/enum");
+const hash = require("../functions/hash");
 
 module.exports.patient = async (req, res) => {};
 
@@ -20,10 +21,10 @@ module.exports.staff = async (req, res) => {
       msg: `email should be containing domains only of ${enums.domain}`,
     });
   }
-
+  const hashed_password = await hash(password);
   await new User({
     email: email,
-    password: password,
+    password: hashed_password,
     role: role,
   })
     .save()

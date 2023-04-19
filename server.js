@@ -31,24 +31,25 @@ app.use(
   })
 );
 
+let dbLink = "";
+let redisLink = "";
+
 if (app.get("env") === "development") {
   // do something in local environment
+  // dbLink = `mongodb://localhost:27017`;
+  dbLink = `mongodb+srv://${process.env.USERNAME_MONGO}:${process.env.PASSWORD_MONGO}@${process.env.CLUSTER_MONGO}/${process.env.DATABASE_NAME}`;
   console.log("Local Environment");
 } else {
   // do something in production environment
+  dbLink = `mongodb+srv://${process.env.USERNAME_MONGO}:${process.env.PASSWORD_MONGO}@${process.env.CLUSTER_MONGO}/${process.env.DATABASE_NAME}`;
   console.log("Production Environment");
 }
-
-const database = process.env.DATABASE_NAME;
 mongoose.set("strictQuery", false);
 mongoose
-  .connect(
-    `mongodb+srv://${process.env.USERNAME_MONGO}:${process.env.PASSWORD_MONGO}@${process.env.CLUSTER_MONGO}/${database}`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(dbLink, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log(logs[1]);
   })
