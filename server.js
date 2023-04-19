@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 
 const app = express();
 
+const logs = require("./logs/logs");
+
 app.use(cors());
 
 const header = {
@@ -29,7 +31,15 @@ app.use(
   })
 );
 
-const database = "HMS-T3";
+if (app.get("env") === "development") {
+  // do something in local environment
+  console.log("Local Environment");
+} else {
+  // do something in production environment
+  console.log("Production Environment");
+}
+
+const database = process.env.DATABASE_NAME;
 mongoose.set("strictQuery", false);
 mongoose
   .connect(
@@ -40,10 +50,10 @@ mongoose
     }
   )
   .then(() => {
-    console.log("Connected to database");
+    console.log(logs[1]);
   })
   .catch((err) => {
-    console.log("Error connecting to database", err);
+    console.log(logs[2], err);
   });
 
 const routes = require("./router/router.js");
@@ -71,5 +81,5 @@ app.use("/app", routes.app);
 
 const PORT = 3000 || process.env.PORT;
 app.listen(PORT, (req, res) => {
-  console.log("Server Listening at : ", PORT);
+  console.log(logs[3], PORT);
 });
