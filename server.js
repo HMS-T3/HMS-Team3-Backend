@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const app = express();
-
+const msgHandler = require("./functions/msgHandler");
 const logs = require("./logs/logs");
 
 app.use(cors());
@@ -38,12 +38,13 @@ if (app.get("env") === "development") {
   // do something in local environment
   // dbLink = `mongodb://localhost:27017`;
   dbLink = `mongodb+srv://${process.env.USERNAME_MONGO}:${process.env.PASSWORD_MONGO}@${process.env.CLUSTER_MONGO}/${process.env.DATABASE_NAME}`;
-  console.log("Local Environment");
+  console.log(msgHandler.pass("Local Environment"));
 } else {
   // do something in production environment
   dbLink = `mongodb+srv://${process.env.USERNAME_MONGO}:${process.env.PASSWORD_MONGO}@${process.env.CLUSTER_MONGO}/${process.env.DATABASE_NAME}`;
-  console.log("Production Environment");
+  console.log(msgHandler.pass("Production Environment"));
 }
+
 mongoose.set("strictQuery", false);
 mongoose
   .connect(dbLink, {
@@ -51,10 +52,10 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log(logs[1]);
+    console.log(msgHandler.pass(logs[1]));
   })
   .catch((err) => {
-    console.log(logs[2], err);
+    console.log(msgHandler.fail(logs[2]), err);
   });
 
 const routes = require("./router/router.js");
@@ -64,7 +65,7 @@ let defaultConsoleLogCounter = 1;
 app.use("*", (req, res, next) => {
   console.warn(
     `${defaultConsoleLogCounter++}.)`,
-    [
+    msgHandler.pass([
       ` Request received at : `,
       req.url,
       req.method,
@@ -72,7 +73,7 @@ app.use("*", (req, res, next) => {
       req.params,
       req.query,
       res.statusCode,
-    ],
+    ]),
     "\n"
   );
   next();
@@ -82,5 +83,5 @@ app.use("/app", routes.app);
 
 const PORT = 3000 || process.env.PORT;
 app.listen(PORT, (req, res) => {
-  console.log(logs[3], PORT);
+  console.log(msgHandler.pass(`${logs[3]} ${PORT}`));
 });

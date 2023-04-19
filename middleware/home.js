@@ -1,3 +1,4 @@
+const msgHandler = require("../functions/msgHandler");
 module.exports.home = (req, res) => {
-  res.status(200).json({ msg: "Server running" });
+  res.status(200).json(msgHandler.pass("Server running"));
 };
