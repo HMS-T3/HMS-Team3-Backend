@@ -8,10 +8,12 @@ const appointment = new mongoose.Schema([
       required: true,
     },
     doctor: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
     },
-    patientName: {
-      type: String,
+    patient: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
     },
     location: {
       longitude: {
