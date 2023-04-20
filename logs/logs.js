@@ -12,6 +12,7 @@ module.exports = {
   11: "Wrong Email",
   12: "User Id Wrong",
   13: "You need to choose any one of the following either `detailsYouNeed` or `exceptdetailsYouDontNeed` ",
+  14: "roles should be correct",
   pass: true,
   fail: false,
 };

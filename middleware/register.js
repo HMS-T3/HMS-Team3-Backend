@@ -37,6 +37,9 @@ module.exports.staff = async (req, res) => {
   if (!(await emailValidator(email))) {
     return res.status(200).json(msgHandler.fail(logs[11]));
   }
+  if (!(role === enums.role_doctor || role === enums.role_nurse)) {
+    return res.status(200).json(msgHandler.fail(logs[14]));
+  }
   if (password.length < 7) {
     return res.status(200).json(msgHandler.fail(logs[4]));
   }
