@@ -40,7 +40,7 @@ module.exports.staff = async (req, res) => {
   if (password.length < 7) {
     return res.status(200).json(msgHandler.fail(logs[4]));
   }
-  if (email.includes(enums.domain)) {
+  if (!email.includes(enums.domain)) {
     return res
       .status(400)
       .json(
