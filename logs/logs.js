@@ -10,6 +10,7 @@ module.exports = {
   9: "Username already exists",
   10: "Error registering new user please try again.",
   11: "Wrong Email",
+  12: "User or Doctor Id Wrong",
   pass: true,
   fail: false,
 };

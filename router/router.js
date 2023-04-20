@@ -9,6 +9,7 @@ router
   .post(routes.loginPatient, middleware.login_patient)
   .post(routes.loginStaff, middleware.login_staff)
   .post(routes.registerStaff, middleware.register_staff)
-  .post(routes.registerPatient, middleware.register_patient);
+  .post(routes.registerPatient, middleware.register_patient)
+  .post(routes.book_appointment, middleware.book_appointment);
 
 module.exports.app = router;
