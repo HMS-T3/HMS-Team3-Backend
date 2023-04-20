@@ -2,36 +2,34 @@ const mongoose = require("mongoose");
 
 const appointment = new mongoose.Schema([
   {
-    data: {
-      date: {
-        type: Date,
-        required: true,
+    // data: {
+    whenDate: {
+      type: Date,
+      required: true,
+    },
+    doctor: {
+      type: String,
+    },
+    patientName: {
+      type: String,
+    },
+    location: {
+      longitude: {
+        type: Number,
       },
-      doctorName: {
-        type: String,
-      },
-      patientName: {
-        type: String,
-      },
-      location: {
-        longitude: {
-          type: Number,
-        },
-        longitude: {
-          type: Number,
-        },
-      },
-      specialization: {
-        type: String,
-      },
-      status: {
-        type: String,
-      },
-      rescheduled: {
-        type: Boolean,
+      longitude: {
+        type: Number,
       },
     },
+    reason: {
+      type: String,
+    },
+
+    status: {
+      type: String,
+    },
   },
+  // },
 ]);
 
 module.exports = mongoose.model("appointments", appointment);
