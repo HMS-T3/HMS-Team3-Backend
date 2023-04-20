@@ -5,4 +5,5 @@ module.exports = {
   registerStaff: "/register/staff",
   registerPatient: "/register/patient",
   book_appointment: "/book_appointment/patient",
+  get_userDetails: "/getUserDetails",
 };

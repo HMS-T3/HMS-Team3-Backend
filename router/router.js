@@ -5,7 +5,10 @@ const routes = require("./routes");
 var path = require("path");
 
 router
+  //get
   .get(routes.root, middleware.home)
+  .get(routes.get_userDetails, middleware.get_userDetails)
+  //post
   .post(routes.loginPatient, middleware.login_patient)
   .post(routes.loginStaff, middleware.login_staff)
   .post(routes.registerStaff, middleware.register_staff)
