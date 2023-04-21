@@ -41,5 +41,14 @@ const user = new mongoose.Schema({
       ref: "appointments",
     },
   ],
+  emergencyContacts: [{
+    name: {
+      type: String,
+      required: true
+    },
+    emergencyPhoneNumber: {
+      type: String,
+    },
+  }]
 });
 module.exports = mongoose.model("users", user);
