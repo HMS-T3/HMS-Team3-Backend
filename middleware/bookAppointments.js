@@ -1,10 +1,9 @@
-const User = require("../models.js").User;
-const Appointment = require("../models.js").Appointment;
+const User = require("../handler/models.js").User;
+const Appointment = require("../handler/models.js").Appointment;
 
-const enums = require("../enums/enum");
+const enums = require("../constants/enum.js");
 const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
-const { patient } = require("./login.js");
 
 module.exports.bookAppointment = async (req, res) => {
   const { patient_id, doctor_id, reason, whenDate } = req.body;
@@ -37,16 +36,12 @@ module.exports.bookAppointment = async (req, res) => {
     })
       .save()
       .then(async (r) => {
-        // console.log("User", patientUser, "Doctor", doctorUser);
         const patientUpdate = {
           appointments: [...patientUser.appointments, r._id],
         };
         const doctorUpdate = {
           schedule: [...doctorUser.schedule, r._id],
         };
-        debugger;
-        // console.log("Update", patientUpdate, doctorUpdate);
-
         const patientUpdateMsg = await User.findOneAndUpdate(
           {
             _id: patientUser._id,

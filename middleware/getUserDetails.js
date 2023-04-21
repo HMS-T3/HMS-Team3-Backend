@@ -1,4 +1,4 @@
-const User = require("../models.js").User;
+const User = require("../handler/models.js").User;
 const msgHandler = require("../functions/msgHandler");
 const logs = require("../logs/logs");
 
