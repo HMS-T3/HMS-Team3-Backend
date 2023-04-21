@@ -3,6 +3,7 @@ const login = require("../middleware/login");
 const register = require("../middleware/register");
 const bookAppointment = require("../middleware/bookAppointments");
 const getUserDetails = require("../middleware/getUserDetails");
+const updateUserprofile = require("../middleware/updateUserProfile")
 
 const middleware = {
   home: home.home,
