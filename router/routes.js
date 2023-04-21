@@ -6,4 +6,5 @@ module.exports = {
   registerPatient: "/register/patient",
   book_appointment: "/book_appointment/patient",
   get_userDetails: "/getUserDetails",
+  update_user_profile: "/update_user_profile/patient",
 };

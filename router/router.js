@@ -13,6 +13,6 @@ router
   .post(routes.loginStaff, middleware.login_staff)
   .post(routes.registerStaff, middleware.register_staff)
   .post(routes.registerPatient, middleware.register_patient)
-  .post(routes.book_appointment, middleware.book_appointment);
-
+  .post(routes.book_appointment, middleware.book_appointment)
+  .post(routes.update_user_profile, middleware.update_user_profile);
 module.exports.app = router;
