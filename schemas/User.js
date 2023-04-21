@@ -28,12 +28,18 @@ const user = new mongoose.Schema({
     biologicalGender: {
       type: String,
     },
-    records: [
+    appointments: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "healthRecords",
+        ref: "appointments",
       },
     ],
+    // records: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "healthRecords",
+    //   },
+    // ],
   },
 });
 module.exports = mongoose.model("users", user);

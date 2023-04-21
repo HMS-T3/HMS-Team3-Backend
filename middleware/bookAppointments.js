@@ -8,19 +8,25 @@ const { patient } = require("./login.js");
 
 module.exports.bookAppointment = async (req, res) => {
   const { patient_id, doctor_id, reason, whenDate } = req.body;
-  const patientUser = await User.findOne({
-    _id: patient_id,
-    role: enums.role_patient,
-  })
+  const patientUser = await User.findOne(
+    {
+      _id: patient_id,
+      role: enums.role_patient,
+    },
+    "-password"
+  )
     .exec()
-    .then((r) => true)
+    .then((r) => r)
     .catch((e) => false);
-  const doctorUser = await User.findOne({
-    _id: doctor_id,
-    role: enums.role_doctor,
-  })
+  const doctorUser = await User.findOne(
+    {
+      _id: doctor_id,
+      role: enums.role_doctor,
+    },
+    "-password"
+  )
     .exec()
-    .then((r) => true)
+    .then((r) => r)
     .catch((e) => false);
   if (patientUser && doctorUser) {
     await new Appointment({
@@ -31,6 +37,7 @@ module.exports.bookAppointment = async (req, res) => {
     })
       .save()
       .then((r) => {
+        console.log("User", patientUser, "Doctor", doctorUser);
         return res.status(200).json(msgHandler.pass(r));
       })
       .catch((e) => {
