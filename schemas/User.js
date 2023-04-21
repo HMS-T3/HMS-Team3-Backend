@@ -28,12 +28,6 @@ const user = new mongoose.Schema({
     biologicalGender: {
       type: String,
     },
-    // records: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "healthRecords",
-    //   },
-    // ],
   },
   appointments: [
     {
