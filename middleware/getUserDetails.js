@@ -18,6 +18,10 @@ module.exports.getUserDetails = async (req, res) => {
     fields
   )
     .exec()
-    .then((r) => res.status(200).json(msgHandler.pass(r)))
+    .then((r) =>
+      r
+        ? res.status(200).json(msgHandler.pass(r))
+        : res.status(200).json(msgHandler.fail(logs[12]))
+    )
     .catch((e) => res.status(200).json(msgHandler.fail(logs[12])));
 };

@@ -36,9 +36,38 @@ module.exports.bookAppointment = async (req, res) => {
       reason: reason,
     })
       .save()
-      .then((r) => {
-        console.log("User", patientUser, "Doctor", doctorUser);
-        return res.status(200).json(msgHandler.pass(r));
+      .then(async (r) => {
+        // console.log("User", patientUser, "Doctor", doctorUser);
+        const patientUpdate = {
+          appointments: [...patientUser.appointments, r._id],
+        };
+        const doctorUpdate = {
+          schedule: [...doctorUser.schedule, r._id],
+        };
+        debugger;
+        // console.log("Update", patientUpdate, doctorUpdate);
+
+        const patientUpdateMsg = await User.findOneAndUpdate(
+          {
+            _id: patientUser._id,
+          },
+          patientUpdate
+        )
+          .then((r) => true)
+          .catch((e) => false);
+
+        if (patientUpdateMsg) {
+          await User.findOneAndUpdate(
+            {
+              _id: doctorUser._id,
+            },
+            doctorUpdate
+          )
+            .then((r) => res.status(200).json(msgHandler.pass(logs[15])))
+            .catch((e) => res.status(200).json(msgHandler.fail(e)));
+        } else {
+          return res.status(200).json(msgHandler.fail(patientUpdateMsg));
+        }
       })
       .catch((e) => {
         return res.status(200).json(msgHandler.fail(e));
