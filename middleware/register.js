@@ -20,7 +20,9 @@ module.exports.patient = async (req, res) => {
     role: enums.role_patient,
   })
     .save()
-    .then((r) => res.status(200).json(msgHandler.pass(logs[5])))
+    .then((r) =>
+      res.status(200).json(msgHandler.pass({ id: r.id, Message: logs[5] }))
+    )
     .catch((err) => {
       if (err) {
         if (err.code === 11000) {
@@ -59,7 +61,9 @@ module.exports.staff = async (req, res) => {
     role: role,
   })
     .save()
-    .then((r) => res.status(200).json(msgHandler.pass(logs[5])))
+    .then((r) =>
+      res.status(200).json(msgHandler.pass({ id: r._id, Message: logs[5] }))
+    )
     .catch((err) => {
       if (err) {
         if (err.code === 11000) {

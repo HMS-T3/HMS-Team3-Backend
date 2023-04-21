@@ -23,7 +23,9 @@ module.exports.patient = async (req, res) => {
       if (user) {
         // const hashed_password = await hash(password);
         if (user.password === hashed_password) {
-          return res.status(200).json(msgHandler.pass(logs[5]));
+          return res
+            .status(200)
+            .json(msgHandler.pass({ id: user.id, Message: logs[5] }));
         } else {
           return res.status(200).json(msgHandler.fail(logs[6]));
         }
@@ -54,7 +56,9 @@ module.exports.staff = async (req, res) => {
       if (user) {
         // const hashed_password = await hash(password);
         if (user.password === hashed_password) {
-          return res.status(200).json(msgHandler.pass(logs[5]));
+          return res
+            .status(200)
+            .json(msgHandler.pass({ id: user.id, Message: logs[5] }));
         } else {
           return res.status(200).json(msgHandler.fail(logs[6]));
         }
