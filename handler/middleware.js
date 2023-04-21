@@ -1,8 +1,8 @@
-const home = require("./home");
-const login = require("./login");
-const register = require("./register");
-const bookAppointment = require("./bookAppointments");
-const getUserDetails = require("./getUserDetails");
+const home = require("../middleware/home");
+const login = require("../middleware/login");
+const register = require("../middleware/register");
+const bookAppointment = require("../middleware/bookAppointments");
+const getUserDetails = require("../middleware/getUserDetails");
 
 const middleware = {
   home: home.home,

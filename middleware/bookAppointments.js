@@ -1,5 +1,5 @@
-const User = require("../models.js").User;
-const Appointment = require("../models.js").Appointment;
+const User = require("../handler/models.js").User;
+const Appointment = require("../handler/models.js").Appointment;
 
 const enums = require("../enums/enum");
 const logs = require("../logs/logs");

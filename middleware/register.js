@@ -1,4 +1,4 @@
-const User = require("../models.js").User;
+const User = require("../handler/models.js").User;
 const enums = require("../enums/enum");
 const hash = require("../functions/hash");
 const logs = require("../logs/logs");

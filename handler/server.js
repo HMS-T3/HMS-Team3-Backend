@@ -6,8 +6,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const app = express();
-const msgHandler = require("./functions/msgHandler");
-const logs = require("./logs/logs");
+const msgHandler = require("../functions/msgHandler");
+const logs = require("../logs/logs");
 
 app.use(cors());
 
@@ -58,7 +58,7 @@ mongoose
     console.log(msgHandler.fail(logs[2]), err);
   });
 
-const routes = require("./router/router.js");
+const routes = require("../router/router.js");
 
 let defaultConsoleLogCounter = 1;
 

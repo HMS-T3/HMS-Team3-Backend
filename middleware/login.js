@@ -1,4 +1,4 @@
-const User = require("../models.js").User;
+const User = require("../handler/models.js").User;
 const enums = require("../enums/enum");
 const hash = require("../functions/hash");
 const logs = require("../logs/logs");
@@ -21,7 +21,6 @@ module.exports.patient = async (req, res) => {
     .exec()
     .then((user) => {
       if (user) {
-        // const hashed_password = await hash(password);
         if (user.password === hashed_password) {
           return res
             .status(200)
@@ -33,7 +32,7 @@ module.exports.patient = async (req, res) => {
         return res.status(200).json(msgHandler.fail(logs[7]));
       }
     })
-    .catch((err) => {
+    .catch(() => {
       return res.status(200).json(msgHandler.fail(logs[8]));
     });
 };
@@ -54,7 +53,6 @@ module.exports.staff = async (req, res) => {
     .exec()
     .then((user) => {
       if (user) {
-        // const hashed_password = await hash(password);
         if (user.password === hashed_password) {
           return res
             .status(200)
@@ -66,7 +64,7 @@ module.exports.staff = async (req, res) => {
         return res.status(200).json(msgHandler.fail(logs[7]));
       }
     })
-    .catch((err) => {
+    .catch(() => {
       return res.status(200).json(msgHandler.fail(logs[8]));
     });
 };

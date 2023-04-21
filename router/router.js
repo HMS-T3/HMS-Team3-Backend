@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const middleware = require("../middleware/middleware");
+const middleware = require("../handler/middleware");
 const routes = require("./routes");
-var path = require("path");
 
 router
   //get
