@@ -1,5 +1,4 @@
 const User = require("../handler/models.js").User;
-const Appointment = require("../handler/models.js").Appointment;
 
 const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
@@ -9,30 +8,33 @@ module.exports.updateUserprofile = async (req, res) => {
   const { user_id, contactNumber, role, name, dateOfBirth, biologicalGender } =
     req.body;
 
-  const patientUser = await User.findOne({
+  const user = await User.findOne({
     _id: user_id,
     role: role,
   })
     .exec()
     .then((r) => r)
-    .catch((e) => false);
+    .catch(() => false);
 
-  if (patientUser) {
-    const patientDetailsUpdate = {
-      info: {
-        phoneNumber: contactNumber,
-        name: name,
-        dateOfBirth: dateOfBirth,
-        biologicalGender: biologicalGender,
-      },
-    };
+  const updates = {
+    info: {
+      phoneNumber: contactNumber ? contactNumber : user.info.phoneNumber,
+      name: name ? name : user.info.name,
+      dateOfBirth: dateOfBirth ? dateOfBirth : user.info.dateOfBirth,
+      biologicalGender: biologicalGender
+        ? biologicalGender
+        : user.info.biologicalGender,
+    },
+  };
+
+  if (user) {
     await User.findOneAndUpdate(
       {
         _id: user_id,
       },
-      patientDetailsUpdate
+      updates
     )
-      .then((r) => res.status(200).json(msgHandler.pass(logs[16])))
+      .then((r) => res.status(200).json(msgHandler.pass(r)))
       .catch((e) => res.status(200).json(msgHandler.fail(e)));
   } else {
     return res.status(200).json(msgHandler.fail(logs[7]));

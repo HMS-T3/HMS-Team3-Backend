@@ -15,6 +15,7 @@ module.exports = {
   14: "roles should be correct",
   15: "Appointments Done",
   16: "User updated",
+
   pass: true,
   fail: false,
 };
