@@ -15,8 +15,9 @@ module.exports.getUserDetails = async (req, res) => {
       _id: user_id,
       role: role,
     },
-    fields
+    [fields, "-__v"]
   )
+    .populate("appointments")
     .exec()
     .then((r) =>
       r
