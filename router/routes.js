@@ -7,4 +7,5 @@ module.exports = {
   book_appointment: "/book_appointment/patient",
   get_userDetails: "/getUserDetails",
   update_user_profile: "/update_user_profile/patient",
+  get_appointment_details: "/get_appointment_details",
 };

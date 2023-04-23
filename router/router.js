@@ -7,6 +7,7 @@ router
   //get
   .get(routes.root, middleware.home)
   .get(routes.get_userDetails, middleware.get_userDetails)
+  .get(routes.get_appointment_details, middleware.get_appointment_details)
   //post
   .post(routes.loginPatient, middleware.login_patient)
   .post(routes.loginStaff, middleware.login_staff)
