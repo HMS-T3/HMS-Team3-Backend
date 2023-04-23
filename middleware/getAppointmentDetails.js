@@ -10,6 +10,7 @@ module.exports.getAppointmentDetails = async (req, res) => {
     _id: appointment_id,
   })
     .exec()
+    .populate("users")
     .then((r) => r)
     .catch(() => false);
 
