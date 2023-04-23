@@ -4,7 +4,7 @@ const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
 
 module.exports.getAppointmentDetails = async (req, res) => {
-  const { appointment_id } = req.body;
+  const { appointment_id } = req.query;
 
   const appointment = await Appointment.findOne({
     _id: appointment_id,
