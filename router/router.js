@@ -9,6 +9,7 @@ router
   .get(routes.get_userDetails, middleware.get_userDetails)
   .get(routes.get_appointment_details, middleware.get_appointment_details)
   .get(routes.getSpecialization, middleware.getSpecialization)
+  .get(routes.getDoctors, middleware.getDoctors)
   //post
   .post(routes.loginPatient, middleware.login_patient)
   .post(routes.loginStaff, middleware.login_staff)
