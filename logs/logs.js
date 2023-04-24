@@ -17,6 +17,7 @@ module.exports = {
   16: "User updated",
   17: "Specialization need to be provided",
   18: "Specialization not present in data",
+  19: "No Data Available",
 
   pass: true,
   fail: false,

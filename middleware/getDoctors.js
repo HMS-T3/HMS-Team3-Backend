@@ -8,8 +8,9 @@ module.exports.getDoctors = async (req, res) => {
 
   const query = {
     role: enums.role_doctor,
-    specialization: Specializations,
   };
+
+  if (Specializations) query.specialization = Specializations;
   await Doctors.find(query, [
     "-emergencyContacts",
     "-appointments",
@@ -18,6 +19,10 @@ module.exports.getDoctors = async (req, res) => {
     "-role",
     "-__v",
   ])
-    .then((r) => res.status(200).json(msgHandler.pass(r)))
+    .then((r) =>
+      r || r !== []
+        ? res.status(200).json(msgHandler.pass(r))
+        : res.status(200).json(msgHandler.fail(logs[19]))
+    )
     .catch((e) => res.status(200).json(msgHandler.fail(e)));
 };
