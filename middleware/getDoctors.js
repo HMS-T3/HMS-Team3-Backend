@@ -4,8 +4,11 @@ const msgHandler = require("../functions/msgHandler");
 const enums = require("../constants/enum");
 
 module.exports.getDoctors = async (req, res) => {
+  const { Specializations } = req.query;
+
   const query = {
     role: enums.role_doctor,
+    specialization: Specializations,
   };
   await Doctors.find(query, [
     "-emergencyContacts",

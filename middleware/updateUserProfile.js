@@ -4,15 +4,8 @@ const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
 
 module.exports.updateUserprofile = async (req, res) => {
-  const {
-    user_id,
-    contactNumber,
-    role,
-    name,
-    dateOfBirth,
-    biologicalGender,
-    specializations,
-  } = req.body;
+  const { user_id, contactNumber, role, name, dateOfBirth, biologicalGender } =
+    req.body;
 
   const user = await User.findOne({
     _id: user_id,

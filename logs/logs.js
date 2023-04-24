@@ -15,6 +15,8 @@ module.exports = {
   14: "roles should be correct",
   15: "Appointments Done",
   16: "User updated",
+  17: "Specialization need to be provided",
+  18: "Specialization not present in data",
 
   pass: true,
   fail: false,

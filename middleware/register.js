@@ -4,6 +4,7 @@ const hash = require("../functions/hash");
 const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
 const emailValidator = require("../functions/emailValidator");
+const specialization = require("../constants/specilization.js");
 
 module.exports.patient = async (req, res) => {
   const { email, password } = req.body;
@@ -35,7 +36,16 @@ module.exports.patient = async (req, res) => {
 };
 
 module.exports.staff = async (req, res) => {
-  const { email, password, role } = req.body;
+  const { email, password, role, specializations } = req.body;
+  if (role === enums.role_doctor) {
+    if (!specializations) {
+      return res.status(200).json(msgHandler.fail(logs[17]));
+    } else {
+      if (!Object.keys(specialization).includes(specializations)) {
+        return res.status(200).json(msgHandler.fail(logs[18]));
+      }
+    }
+  }
   if (!(await emailValidator(email))) {
     return res.status(200).json(msgHandler.fail(logs[11]));
   }
@@ -59,6 +69,7 @@ module.exports.staff = async (req, res) => {
     email: email,
     password: hashed_password,
     role: role,
+    specialization: role === enums.role_doctor && specializations,
   })
     .save()
     .then((r) =>
