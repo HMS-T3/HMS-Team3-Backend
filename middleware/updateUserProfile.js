@@ -2,7 +2,6 @@ const User = require("../handler/models.js").User;
 
 const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
-const { patient } = require("./login.js");
 
 module.exports.updateUserprofile = async (req, res) => {
   const { user_id, contactNumber, role, name, dateOfBirth, biologicalGender } =
@@ -16,16 +15,29 @@ module.exports.updateUserprofile = async (req, res) => {
     .then((r) => r)
     .catch(() => false);
 
-  const updates = {
-    info: {
-      phoneNumber: contactNumber ? contactNumber : user.info.phoneNumber,
-      name: name ? name : user.info.name,
-      dateOfBirth: dateOfBirth ? dateOfBirth : user.info.dateOfBirth,
-      biologicalGender: biologicalGender
-        ? biologicalGender
-        : user.info.biologicalGender,
-    },
-  };
+  let updates = {};
+  try {
+    updates = {
+      info: {
+        phoneNumber: contactNumber ? contactNumber : user.info.phoneNumber,
+        name: name ? name : user.info.name,
+        dateOfBirth: dateOfBirth ? dateOfBirth : user.info.dateOfBirth,
+        biologicalGender: biologicalGender
+          ? biologicalGender
+          : user.info.biologicalGender,
+      },
+    };
+  } catch (e) {
+    updates = {
+      info: {
+        phoneNumber: contactNumber,
+        name: name,
+        dateOfBirth: dateOfBirth,
+        biologicalGender: biologicalGender,
+      },
+    };
+  }
+
 
   if (user) {
     await User.findOneAndUpdate(
