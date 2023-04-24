@@ -9,10 +9,11 @@ module.exports.getAppointmentDetails = async (req, res) => {
   const appointment = await Appointment.findOne({
     _id: appointment_id,
   })
-    .exec()
-    .populate("users")
-    .then((r) => r)
-    .catch(() => false);
+
+      .populate("doctor")
+      .populate("patient")
+      .then((r) => r)
+      .catch(() => false);
 
   if (appointment) {
     return res.status(200).json(msgHandler.pass(appointment));
