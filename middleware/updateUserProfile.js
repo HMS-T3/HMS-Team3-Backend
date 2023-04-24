@@ -37,7 +37,7 @@ module.exports.updateUserprofile = async (req, res) => {
       },
     };
   }
-  // console.log(updates)
+
 
   if (user) {
     await User.findOneAndUpdate(

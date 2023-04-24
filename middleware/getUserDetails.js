@@ -8,6 +8,7 @@ module.exports.getUserDetails = async (req, res) => {
   if (detailsYouNeed && exceptDetailsYouDonNeed)
     return res.status(200).json(msgHandler.fail(logs[13]));
   if (detailsYouNeed) fields = detailsYouNeed;
+  console.log(fields);
   if (exceptDetailsYouDonNeed) fields = `-${exceptDetailsYouDonNeed}`;
 
   await User.findOne(
