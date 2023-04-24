@@ -9,12 +9,12 @@ module.exports.getScheduleDetails = async (req, res) => {
   const schedule = await Appointment.findOne({
     _id: schedule_id,
   })
-    .populate(schedule._id, "doctor")
+    .populate("doctor")
     .populate("patient")
     .then((r) => r)
     .catch(() => false);
 
-  if (appointment) {
+  if (schedule) {
     return res.status(200).json(msgHandler.pass(schedule));
   } else {
     return res.status(200).json(msgHandler.fail(logs[7]));
