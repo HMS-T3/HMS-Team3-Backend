@@ -9,7 +9,6 @@ module.exports.getAppointmentDetails = async (req, res) => {
   const appointment = await Appointment.findOne({
     _id: appointment_id,
   })
-    .exec()
     .populate("users")
     .then((r) => r)
     .catch(() => false);
