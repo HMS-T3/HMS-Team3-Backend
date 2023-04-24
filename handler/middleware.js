@@ -6,6 +6,9 @@ const getUserDetails = require("../middleware/getUserDetails");
 const updateUserprofile = require("../middleware/updateUserProfile");
 const getAppointmentDetails = require("../middleware/getAppointmentDetails");
 const getScheduleDetails = require("../middleware/getScheduleDetails");
+const getSpecialization = require("../middleware/getSpecilzation");
+const getDoctors = require("../middleware/getDoctors");
+
 const middleware = {
   home: home.home,
   login_patient: login.patient,
@@ -17,6 +20,8 @@ const middleware = {
   update_user_profile: updateUserprofile.updateUserprofile,
   get_appointment_details: getAppointmentDetails.getAppointmentDetails,
   get_schedule_details: getScheduleDetails.getScheduleDetails,
+  getSpecialization: getSpecialization.getSpecialization,
+  getDoctors: getDoctors.getDoctors,
 };
 
 module.exports = middleware;
