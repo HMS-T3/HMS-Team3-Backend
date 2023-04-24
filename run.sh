@@ -12,5 +12,7 @@ else
   echo "No process listening on port 3000"
 fi
 
+
+export PORT=3000
 npm ci
 npm start --port 3000
