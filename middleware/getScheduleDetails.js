@@ -1,29 +1,22 @@
-const User = require("../handler/models.js").User;
-const msgHandler = require("../functions/msgHandler");
+const Appointment = require("../handler/models.js").Appointment;
+
 const logs = require("../logs/logs");
+const msgHandler = require("../functions/msgHandler");
 
-module.exports.getUserDetails = async (req, res) => {
-  const { user_id, role, detailsYouNeed, exceptDetailsYouDonNeed } = req.query;
-  let fields;
-  if (detailsYouNeed && exceptDetailsYouDonNeed)
-    return res.status(200).json(msgHandler.fail(logs[13]));
-  if (detailsYouNeed) fields = detailsYouNeed;
-  console.log(fields);
-  if (exceptDetailsYouDonNeed) fields = `-${exceptDetailsYouDonNeed}`;
+module.exports.getScheduleDetails = async (req, res) => {
+  const { schedule_id} = req.query;
 
-  await User.findOne(
-    {
-      _id: user_id,
-      role: role,
-    },
-    [fields, "-__v"]
-  )
-    .populate("appointments")
-    .exec()
-    .then((r) =>
-      r
-        ? res.status(200).json(msgHandler.pass(r))
-        : res.status(200).json(msgHandler.fail(logs[12]))
-    )
-    .catch((e) => res.status(200).json(msgHandler.fail(logs[12])));
+  const schedule = await Appointment.findOne({
+    _id: schedule_id,
+  })
+    .populate(schedule._id, "doctor")
+    .populate("patient")
+    .then((r) => r)
+    .catch(() => false);
+
+  if (appointment) {
+    return res.status(200).json(msgHandler.pass(schedule));
+  } else {
+    return res.status(200).json(msgHandler.fail(logs[7]));
+  }
 };
