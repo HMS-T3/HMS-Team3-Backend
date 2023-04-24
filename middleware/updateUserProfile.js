@@ -16,16 +16,29 @@ module.exports.updateUserprofile = async (req, res) => {
     .then((r) => r)
     .catch(() => false);
 
-  const updates = {
-    info: {
-      phoneNumber: contactNumber ? contactNumber : user.info.phoneNumber,
-      name: name ? name : user.info.name,
-      dateOfBirth: dateOfBirth ? dateOfBirth : user.info.dateOfBirth,
-      biologicalGender: biologicalGender
-        ? biologicalGender
-        : user.info.biologicalGender,
-    },
-  };
+  let updates = {};
+  try {
+    updates = {
+      info: {
+        phoneNumber: contactNumber ? contactNumber : user.info.phoneNumber,
+        name: name ? name : user.info.name,
+        dateOfBirth: dateOfBirth ? dateOfBirth : user.info.dateOfBirth,
+        biologicalGender: biologicalGender
+          ? biologicalGender
+          : user.info.biologicalGender,
+      },
+    };
+  } catch (e) {
+    updates = {
+      info: {
+        phoneNumber: contactNumber,
+        name: name,
+        dateOfBirth: dateOfBirth,
+        biologicalGender: biologicalGender,
+      },
+    };
+  }
+  // console.log(updates)
 
   if (user) {
     await User.findOneAndUpdate(
