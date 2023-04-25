@@ -1,6 +1,7 @@
 const ejs = require("ejs");
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
+const enums = require("../constants/enum");
 
 const CLIENT_ID_MAIL = process.env.EMAIL_CLIENTID;
 const CLIENT_SECRET_MAIL = process.env.EMAIL_SECRET;
@@ -32,10 +33,12 @@ module.exports = async function sendMail(to, subject, text, name) {
       },
     });
 
-    MailTemplate = await ejs.renderFile(__dirname + "/../views/mail.ejs", {});
+    MailTemplate = await ejs.renderFile(__dirname + "/../views/mail.ejs", {
+      email: to,
+    });
 
     const mailOptions = {
-      from: "HMS-T3",
+      from: enums.emailFrom,
       to: to,
       subject: subject,
       text: text,

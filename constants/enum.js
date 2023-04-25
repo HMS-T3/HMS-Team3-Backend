@@ -4,4 +4,5 @@ module.exports = {
   role_patient: "patient",
   role_nurse: "nurse",
   role_staff: "staff",
+  emailFrom: "HMS-T3",
 };

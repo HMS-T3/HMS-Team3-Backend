@@ -25,7 +25,7 @@ module.exports.patient = async (req, res) => {
         if (user.password === hashed_password) {
           await sendMail(
             email,
-            "Login Successful",
+            `Hello ${email}`,
             "You have successfully logged in to your account.",
             email
           );
@@ -58,9 +58,10 @@ module.exports.staff = async (req, res) => {
     role: role,
   })
     .exec()
-    .then((user) => {
+    .then(async (user) => {
       if (user) {
         if (user.password === hashed_password) {
+          await sendMail(email, `Hello ${email}`, logs[20], email);
           return res
             .status(200)
             .json(msgHandler.pass({ id: user.id, Message: logs[5] }));
