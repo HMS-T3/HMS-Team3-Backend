@@ -9,10 +9,10 @@ const specialization = require("../constants/specilization.js");
 module.exports.patient = async (req, res) => {
   const { email, password } = req.body;
   if (!(await emailValidator(email))) {
-    return res.status(200).json(msgHandler.fail(logs[11]));
+    return res.status(200).json(msgHandler.fail({Message: logs[11]}));
   }
   if (password.length < 7) {
-    return res.status(200).json(msgHandler.fail(logs[4]));
+    return res.status(200).json(msgHandler.fail({Message: logs[4]}));
   }
   const userExist = await User.findOne({
     email: email,
@@ -21,7 +21,7 @@ module.exports.patient = async (req, res) => {
     .exec()
     .then((r) => (r ? true : false))
     .catch((e) => false);
-  if (userExist) return res.status(200).json(msgHandler.fail(logs[9]));
+  if (userExist) return res.status(200).json(msgHandler.fail({Message: logs[9]}));
 
   const hashed_password = await hash(email, password, enums.role_patient);
   await new User({
@@ -48,21 +48,21 @@ module.exports.staff = async (req, res) => {
   const { email, password, role, specializations } = req.body;
   if (role === enums.role_doctor) {
     if (!specializations) {
-      return res.status(200).json(msgHandler.fail(logs[17]));
+      return res.status(200).json(msgHandler.fail({Message: logs[17]}));
     } else {
       if (!Object.keys(specialization).includes(specializations)) {
-        return res.status(200).json(msgHandler.fail(logs[18]));
+        return res.status(200).json(msgHandler.fail({Message: logs[18]}));
       }
     }
   }
   if (!(await emailValidator(email))) {
-    return res.status(200).json(msgHandler.fail(logs[11]));
+    return res.status(200).json(msgHandler.fail({Message: logs[11]}));
   }
   if (!(role === enums.role_doctor || role === enums.role_nurse)) {
-    return res.status(200).json(msgHandler.fail(logs[14]));
+    return res.status(200).json(msgHandler.fail({Message: logs[14]}));
   }
   if (password.length < 7) {
-    return res.status(200).json(msgHandler.fail(logs[4]));
+    return res.status(200).json(msgHandler.fail({Message: logs[4]}));
   }
   if (!email.includes(enums.domain)) {
     return res
@@ -81,7 +81,7 @@ module.exports.staff = async (req, res) => {
     .exec()
     .then((r) => (r ? true : false))
     .catch((e) => false);
-  if (userExist) return res.status(200).json(msgHandler.fail(logs[9]));
+  if (userExist) return res.status(200).json(msgHandler.fail({Message: logs[9]}));
 
   const hashed_password = await hash(email, password, role);
   await new User({
