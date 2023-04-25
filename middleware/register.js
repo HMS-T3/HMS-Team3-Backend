@@ -14,6 +14,15 @@ module.exports.patient = async (req, res) => {
   if (password.length < 7) {
     return res.status(200).json(msgHandler.fail(logs[4]));
   }
+  const userExist = await User.findOne({
+    email: email,
+    role: enums.role_patient,
+  })
+    .exec()
+    .then((r) => (r ? true : false))
+    .catch((e) => false);
+  if (userExist) return res.status(200).json(msgHandler.fail(logs[9]));
+
   const hashed_password = await hash(email, password, enums.role_patient);
   await new User({
     email: email,
@@ -64,6 +73,16 @@ module.exports.staff = async (req, res) => {
         )
       );
   }
+
+  const userExist = await User.findOne({
+    email: email,
+    role: role,
+  })
+    .exec()
+    .then((r) => (r ? true : false))
+    .catch((e) => false);
+  if (userExist) return res.status(200).json(msgHandler.fail(logs[9]));
+
   const hashed_password = await hash(email, password, role);
   await new User({
     email: email,
