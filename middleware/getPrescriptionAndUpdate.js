@@ -56,7 +56,7 @@ module.exports.getPrescriptionAndUpdate = async(req, res) =>{
        };
    } 
    if (appointment) {
-    await Appointment.findOneAndUpdate(
+    await Prescription.findOneAndUpdate(
       {
         _id: appointment_id,
       },
