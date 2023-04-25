@@ -36,9 +36,9 @@ module.exports.patient = async (req, res) => {
     .catch((err) => {
       if (err) {
         if (err.code === 11000) {
-          return res.status(409).json(msgHandler.fail(logs[9]));
+          return res.status(409).json(msgHandler.fail({Message: logs[9]}));
         } else {
-          return res.status(500).json(msgHandler.fail(logs[10]));
+          return res.status(500).json(msgHandler.fail({Message: logs[10]}));
         }
       }
     });
@@ -97,9 +97,9 @@ module.exports.staff = async (req, res) => {
     .catch((err) => {
       if (err) {
         if (err.code === 11000) {
-          return res.status(409).json(msgHandler.fail(logs[9]));
+          return res.status(409).json(msgHandler.fail({Message: logs[9]}));
         } else {
-          return res.status(500).json(msgHandler.fail(logs[10]));
+          return res.status(500).json(msgHandler.fail({Message: logs[10]}));
         }
       }
     });
