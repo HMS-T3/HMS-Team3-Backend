@@ -11,4 +11,5 @@ module.exports = {
   get_schedule_details: "/get_schedule_details",
   getSpecialization: "/get_specializations",
   getDoctors: "/get_doctors",
+  get_prescription_and_update: "/get_prescription_and_update",
 };

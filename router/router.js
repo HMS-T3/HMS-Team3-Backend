@@ -17,5 +17,6 @@ router
   .post(routes.registerStaff, middleware.register_staff)
   .post(routes.registerPatient, middleware.register_patient)
   .post(routes.book_appointment, middleware.book_appointment)
-  .post(routes.update_user_profile, middleware.update_user_profile);
+  .post(routes.update_user_profile, middleware.update_user_profile)
+  .post(routes.get_prescription_and_update, middleware.getPrescriptionAndUpdate);
 module.exports.app = router;
