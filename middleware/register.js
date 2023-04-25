@@ -7,7 +7,7 @@ const emailValidator = require("../functions/emailValidator");
 const specialization = require("../constants/specilization.js");
 
 module.exports.patient = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, phoneNumber } = req.body;
   if (!(await emailValidator(email))) {
     return res.status(200).json(msgHandler.fail({Message: logs[11]}));
   }
