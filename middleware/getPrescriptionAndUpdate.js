@@ -5,7 +5,7 @@ const Appointment = require("../schemas/Appointment.js");
 const Prescription = require("../schemas/Prescription.js");
 
 module.exports.getPrescriptionAndUpdate = async(req, res) =>{
-    const { prescription_id, appointment_id, diagnosis, medicineName, timeOfTheDay, amount, amountTypes, labTestName, labTestResult} = 
+    const {appointment_id, diagnosis, medicineName, timeOfTheDay, amount, amountTypes, labTestName, labTestResult} = 
         req.body;
     
     const appointment =await Appointment.findOne({
@@ -13,7 +13,7 @@ module.exports.getPrescriptionAndUpdate = async(req, res) =>{
     })
 
     const prescriptions = await Prescription.findOne({
-        _id: prescription_id,
+        _id: appointment_id,
     })
     .exec()
     .then((r) => r)

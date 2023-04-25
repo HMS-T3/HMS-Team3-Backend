@@ -9,7 +9,7 @@ module.exports.getAppointmentDetails = async (req, res) => {
   const appointment = await Appointment.findOne({
     _id: appointment_id,
   })
-    .populate(appointment._id, "doctor")
+    .populate("doctor")
     .populate("patient")
     .then((r) => r)
     .catch(() => false);
