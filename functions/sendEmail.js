@@ -32,10 +32,7 @@ module.exports = async function sendMail(to, subject, text, name) {
       },
     });
 
-    MailTemplate = await ejs.renderFile(__dirname + "/../views/mail.ejs", {
-      name: name,
-      type: type,
-    });
+    MailTemplate = await ejs.renderFile(__dirname + "/../views/mail.ejs", {});
 
     const mailOptions = {
       from: "HMS-T3",

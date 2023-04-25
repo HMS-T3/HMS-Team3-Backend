@@ -4,6 +4,7 @@ const hash = require("../functions/hash");
 const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
 const emailValidator = require("../functions/emailValidator");
+const sendMail = require("../functions/sendEmail");
 
 module.exports.patient = async (req, res) => {
   const { email, password } = req.body;
@@ -19,9 +20,15 @@ module.exports.patient = async (req, res) => {
     role: enums.role_patient,
   })
     .exec()
-    .then((user) => {
+    .then(async (user) => {
       if (user) {
         if (user.password === hashed_password) {
+          await sendMail(
+            email,
+            "Login Successful",
+            "You have successfully logged in to your account.",
+            email
+          );
           return res
             .status(200)
             .json(msgHandler.pass({ id: user.id, Message: logs[5] }));
