@@ -8,6 +8,8 @@ const getAppointmentDetails = require("../middleware/getAppointmentDetails");
 const getScheduleDetails = require("../middleware/getScheduleDetails");
 const getSpecialization = require("../middleware/getSpecilzation");
 const getDoctors = require("../middleware/getDoctors");
+const getPrescriptionAndUpdate = require("../middleware/getPrescriptionAndUpdate");
+
 
 const middleware = {
   home: home.home,
@@ -22,6 +24,7 @@ const middleware = {
   get_schedule_details: getScheduleDetails.getScheduleDetails,
   getSpecialization: getSpecialization.getSpecialization,
   getDoctors: getDoctors.getDoctors,
+  getPrescriptionAndUpdate: getPrescriptionAndUpdate.getPrescriptionAndUpdate,
 };
 
 module.exports = middleware;
