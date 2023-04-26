@@ -18,7 +18,7 @@ module.exports = {
   17: "Specialization need to be provided",
   18: "Specialization not present in data",
   19: "No Data Available",
-
+  20: "Wrong Phone",
   pass: true,
   fail: false,
 };

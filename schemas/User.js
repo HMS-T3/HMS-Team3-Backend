@@ -8,10 +8,15 @@ const user = new mongoose.Schema({
   specialization: {
     type: String,
   },
+  phoneNumber: {
+    type: String,
+    // unique: true,
+    // required: true,
+  },
   email: {
     type: String,
-    unique: true,
-    required: true,
+    // unique: true,
+    // required: true,
   },
   password: {
     type: String,

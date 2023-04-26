@@ -33,7 +33,7 @@ module.exports.getUserDetails = async (req, res) => {
     // [fields, "-__v"]
     newArray
   )
-    // .populate("appointments")
+    .populate("appointments")
     .exec()
     .then((r) =>
       r
