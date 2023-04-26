@@ -30,6 +30,11 @@ const appointment = new mongoose.Schema([
     status: {
       type: String,
     },
+    prescription: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "prescriptions",
+    },
+
   },
   // },
 ]);

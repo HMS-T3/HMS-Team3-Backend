@@ -18,6 +18,7 @@ module.exports = {
   17: "Specialization need to be provided",
   18: "Specialization not present in data",
   19: "No Data Available",
+  22: "Succesfully updated prescription",
 
   pass: true,
   fail: false,
