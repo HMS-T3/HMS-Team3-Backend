@@ -3,4 +3,4 @@
 <code>./run.sh</code>
 <br/>
 <br/>
-<a href="https://aryan920.atlassian.net/wiki/spaces/~60df7b746d06630068b4a0b4/pages/426003/Backend+.sh">Confluence Link</a>
+<a target="_blank" href="https://aryan920.atlassian.net/wiki/spaces/~60df7b746d06630068b4a0b4/pages/426003/Backend+.sh">Confluence Link</a>
