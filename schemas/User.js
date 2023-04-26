@@ -27,7 +27,6 @@ const user = new mongoose.Schema({
     },
     dateOfBirth: {
       type: Date,
-      trim: true,
     },
     phoneNumber: {
       type: String,

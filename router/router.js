@@ -11,6 +11,7 @@ router
   .get(routes.get_schedule_details, middleware.get_schedule_details)
   .get(routes.getSpecialization, middleware.getSpecialization)
   .get(routes.getDoctors, middleware.getDoctors)
+  .get(routes.test, middleware.test)
   //post
   .post(routes.loginPatient, middleware.login_patient)
   .post(routes.loginStaff, middleware.login_staff)
