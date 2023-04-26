@@ -1,7 +1,7 @@
 const cloudinary = require("../functions/cloudinary.js");
 const fs = require("fs");
 
-module.exports.upload = async (req, res, next) => {
+module.exports.upload = async (req, res) => {
   res.setHeader("Content-Type", "multipart/form-data");
 
   //   console.log(req.file.path);
