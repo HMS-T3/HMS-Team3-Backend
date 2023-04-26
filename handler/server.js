@@ -63,6 +63,7 @@ let defaultConsoleLogCounter = 1;
 
 app.use("*", (req, res, next) => {
   console.warn(
+    "-----------------------------\n",
     `${defaultConsoleLogCounter++}.)`,
     msgHandler.pass([
       ` Request received at : `,
@@ -73,6 +74,7 @@ app.use("*", (req, res, next) => {
       req.query,
       res.statusCode,
     ]),
+    "\n-----------------------------",
     "\n"
   );
   next();

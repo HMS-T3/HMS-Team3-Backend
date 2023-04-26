@@ -7,7 +7,7 @@ module.exports = {
   6: "Wrong Password",
   7: "User not found",
   8: "Error logging in",
-  9: "Username already exists",
+  9: "User already exists same email or phone",
   10: "Error registering new user please try again.",
   11: "Wrong Email",
   12: "User Id Wrong",
@@ -19,6 +19,8 @@ module.exports = {
   18: "Specialization not present in data",
   19: "No Data Available",
   20: "You have successfully logged in to your account.",
+  21: "Wrong Phone",
+  22: "No Email or phone provided",
 
   pass: true,
   fail: false,

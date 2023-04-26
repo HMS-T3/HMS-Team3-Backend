@@ -2,6 +2,7 @@ const ejs = require("ejs");
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 const enums = require("../constants/enum");
+const msgHandler = require("../functions/msgHandler");
 
 const CLIENT_ID_MAIL = process.env.EMAIL_CLIENTID;
 const CLIENT_SECRET_MAIL = process.env.EMAIL_SECRET;
@@ -46,10 +47,10 @@ module.exports = async function sendMail(to, subject, text, name) {
     };
 
     const result = await transport.sendMail(mailOptions);
-    console.log(result);
+    console.log(msgHandler.pass(result));
     return result;
   } catch (error) {
-    console.log(error);
+    console.log(msgHandler.fail(error));
     return error;
   }
 };
