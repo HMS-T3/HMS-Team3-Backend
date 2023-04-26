@@ -8,7 +8,8 @@ const sendMail = require("../functions/sendEmail");
 const phoneValidator = require("../functions/phoneValidator.js");
 
 module.exports.patient = async (req, res) => {
-  const { email, password, phoneNumber } = req.body;
+  const { email, password, phoneNumber, file } = req.body;
+
   let [hashed_password, query] = ["", {}];
 
   if (!emailValidator(email) && email)

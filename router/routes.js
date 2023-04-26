@@ -12,4 +12,5 @@ module.exports = {
   getSpecialization: "/get_specializations",
   getDoctors: "/get_doctors",
   test: "/test",
+  upload: "/upload",
 };
