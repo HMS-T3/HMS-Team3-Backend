@@ -1,69 +1,70 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Welcome back to HMS-T3 Hospital</title>
+    <title>Welcome Back to Our Hospital</title>
     <style>
+      /* Reset default margin and padding */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      /* Set a background color and a font family */
       body {
+        background-color: #f7f7f7;
         font-family: Arial, sans-serif;
-        color: #333;
-        background-color: #f5f5f5;
+      }
+      /* Center the content */
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 50px 20px;
+        text-align: center;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
       }
       h1 {
         font-size: 36px;
-        text-align: center;
-        margin-top: 40px;
+        font-weight: bold;
+        color: #008080;
+        margin-bottom: 20px;
       }
       p {
         font-size: 18px;
+        color: #333;
         line-height: 1.5;
-        margin: 20px 0;
+        margin-bottom: 30px;
       }
-      .message {
-        width: 600px;
-        margin: 0 auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-      }
-      .signature {
-        text-align: right;
-        margin-top: 20px;
-      }
-      .signature p {
-        font-style: italic;
+      .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #008080;
+        color: #fff;
         font-size: 16px;
-        margin-bottom: 5px;
+        font-weight: bold;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: all 0.3s ease;
       }
-      .signature img {
-        width: 100px;
+      .btn:hover {
+        background-color: #006666;
       }
     </style>
   </head>
   <body>
-    <div class="message">
-      <h1>Welcome back to HMS-T3 Hospital</h1>
-      <p>Dear <%= email %></p>
+    <div class="container">
+      <h1>Welcome Back to Our Hospital</h1>
       <p>
-        We are glad to see you back at HMS-T3 Hospital. We hope you are feeling
-        better and have fully recovered from your medical condition. Our team of
-        doctors and nurses is here to provide you with the best possible care
-        and support during your stay with us.
+        We are thrilled to have you back with us <%= email %>! Our team of
+        skilled healthcare professionals is dedicated to providing you with the
+        best possible care and treatment.
       </p>
       <p>
-        If you have any questions or concerns during your stay, please do not
-        hesitate to contact our staff. We are here to ensure that your
-        experience with us is as comfortable and stress-free as possible.
+        If you have any questions or concerns, please don't hesitate to contact
+        us. We're always here to help you in any way we can.
       </p>
-      <p>
-        Thank you for choosing HMS-T3 Hospital for your healthcare needs. We
-        wish you a speedy recovery and hope to see you back on your feet soon.
-      </p>
-      <div class="signature">
-        <p>Sincerely,</p>
-        <img src="hospital_logo.png" alt="Hospital Logo" />
-        <p>HMS-T3 Hospital Team</p>
-      </div>
+      <a href="#" class="btn">Contact Us</a>
     </div>
   </body>
 </html>
