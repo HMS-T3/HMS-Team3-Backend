@@ -26,7 +26,9 @@ module.exports.addData = async (req, res) => {
     let obj = {};
     if (userR === "doctor")
       obj["specialization"] = removeUnderscore(
-        Object.keys(specialization)[Math.floor(Math.random() * 5)]
+        Object.keys(specialization)[
+          Math.floor(Math.random() * specialization.length)
+        ]
       );
     obj["email"] = response[i]["email"];
     obj["phoneNumber"] = removeSeparators(response[i]["phone"]);
