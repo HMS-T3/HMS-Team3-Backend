@@ -15,8 +15,8 @@ module.exports.patient = async (req, res) => {
   if (!emailValidator(email) && email)
     return res.status(200).json(msgHandler.fail(logs[11]));
 
-  // if (!phoneValidator(phoneNumber) && phoneNumber)
-  //   return res.status(200).json(msgHandler.fail(logs[21]));
+  if (!phoneValidator(phoneNumber) && phoneNumber)
+    return res.status(200).json(msgHandler.fail(logs[21]));
 
   if (email)
     if (!password) return res.status(200).json(msgHandler.fail(logs[4]));
