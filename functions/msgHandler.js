@@ -2,9 +2,7 @@ const logs = require("../logs/logs");
 
 module.exports.pass = (msg) => {
   return {
-    Response: {
-      Message: msg,
-    },
+    Response: msg,
     Status: logs.pass,
   };
 };
