@@ -81,13 +81,23 @@ module.exports.patient = async (req, res) => {
 
 module.exports.staff = async (req, res) => {
   const { email, password, role, specializations } = req.body;
+  // console.log(
+  //   "fvbdfb",
+  //   specialization
+  //     .map((doctor) => doctor.specialization)
+  //     .includes(specializations)
+  // );
   if (role === enums.role_doctor) {
     if (!specializations) {
       return res.status(200).json(msgHandler.fail(logs[17]));
     } else {
-      if (!Object.keys(specialization).includes(specializations)) {
-        return res.status(200).json(msgHandler.fail(logs[18]));
-      }
+      // if (
+      //   specialization
+      //     .map((doctor) => doctor.specialization)
+      //     .includes(specializations)
+      // ) {
+      //   return res.status(200).json(msgHandler.fail(logs[18]));
+      // }
     }
   }
   if (!(await emailValidator(email))) {
@@ -123,7 +133,9 @@ module.exports.staff = async (req, res) => {
     email: email,
     password: hashed_password,
     role: role,
-    specialization: role === enums.role_doctor && specializations,
+    doctorInfo: {
+      specialization: role === enums.role_doctor && specializations,
+    },
   })
     .save()
     .then(async (r) => {

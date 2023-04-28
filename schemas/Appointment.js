@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 const appointment = new mongoose.Schema([
   {
     // data: {
-    whenDate: {
-      type: Date,
-      required: true,
+    timeSlot: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "availability",
     },
     doctor: {
       type: mongoose.Schema.Types.ObjectId,

@@ -44,6 +44,7 @@ router
   .get(routes.getSpecialization, middleware.getSpecialization)
   .get(routes.getDoctors, middleware.getDoctors)
   .get(routes.test, middleware.test)
+  .get(routes.dropTable, middleware.dropTable)
   //post
   .post(routes.upload, upload.single("file"), middleware.upload)
   .post(routes.loginPatient, middleware.login_patient)
@@ -51,5 +52,6 @@ router
   .post(routes.registerStaff, middleware.register_staff)
   .post(routes.registerPatient, middleware.register_patient)
   .post(routes.book_appointment, middleware.book_appointment)
-  .post(routes.update_user_profile, middleware.update_user_profile);
+  .post(routes.update_user_profile, middleware.update_user_profile)
+  .post(routes.addAvailability, middleware.addAvailability);
 module.exports.app = router;

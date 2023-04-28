@@ -5,9 +5,6 @@ const user = new mongoose.Schema({
     type: String,
     required: true,
   },
-  specialization: {
-    type: String,
-  },
   phoneNumber: {
     type: String,
   },
@@ -18,7 +15,27 @@ const user = new mongoose.Schema({
     type: String,
     required: true,
   },
+  doctorInfo: {
+    specialization: {
+      type: String,
+    },
+    degree: {
+      type: String,
+    },
+    experience: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+  },
+  availability: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "availability",
+  },
+
   info: {
+    //personal info
     profileImg: {
       type: String,
     },
@@ -51,7 +68,7 @@ const user = new mongoose.Schema({
     {
       name: {
         type: String,
-        required: true,
+        // required: true,
       },
       emergencyPhoneNumber: {
         type: String,
