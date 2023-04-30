@@ -204,7 +204,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{env}}/getUserDetails?user_id=644eb408eaeced08849a1aed&role={{role_doctor}}&detailsYouDontNeed=_id,appointments,emergencyContacts",
+					"raw": "{{env}}/getUserDetails?user_id=644ed2503e3cb5d336f61f18&role={{role_doctor}}&detailsYouDontNeed=_id,appointments,emergencyContacts",
 					"host": [
 						"{{env}}"
 					],
@@ -214,7 +214,7 @@
 					"query": [
 						{
 							"key": "user_id",
-							"value": "644eb408eaeced08849a1aed"
+							"value": "644ed2503e3cb5d336f61f18"
 						},
 						{
 							"key": "role",

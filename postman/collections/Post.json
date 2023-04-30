@@ -330,19 +330,8 @@
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
-							"key": "user_id",
-							"value": "644653fda4fe0d1df836f59a",
-							"type": "text"
-						},
-						{
-							"key": "role",
-							"value": "{{role_doctor}}",
-							"description": "patient or doctor or nurse",
-							"type": "text"
-						},
-						{
 							"key": "contactNumber",
-							"value": "938727817392",
+							"value": "93872781733",
 							"type": "text"
 						},
 						{
@@ -364,13 +353,23 @@
 					]
 				},
 				"url": {
-					"raw": "{{env}}/update_user_profile/patient",
+					"raw": "{{env}}/update_user_profile/patient?user_id=644ed393bf87ea815123004b&role={{role_patient}}",
 					"host": [
 						"{{env}}"
 					],
 					"path": [
 						"update_user_profile",
 						"patient"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "644ed393bf87ea815123004b"
+						},
+						{
+							"key": "role",
+							"value": "{{role_patient}}"
+						}
 					]
 				}
 			},
