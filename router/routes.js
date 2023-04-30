@@ -15,4 +15,5 @@ module.exports = {
   upload: "/upload",
   addAvailability: "/addAvailability",
   dropTable: "/dropTable",
+  updateSOSContacts: "/updateSOSContacts",
 };

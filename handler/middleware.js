@@ -11,6 +11,7 @@ const getDoctors = require("../middleware/getDoctors");
 const upload = require("../middleware/upload");
 const addAvailability = require("../middleware/addAvailability");
 const dropTable = require("../middleware/dropTable");
+const updateSOSContacts = require("../middleware/updateSOSContacts");
 
 const test = require("../test/addData");
 
@@ -31,6 +32,7 @@ const middleware = {
   upload: upload.upload,
   addAvailability: addAvailability.addAvailability,
   dropTable: dropTable.dropTable,
+  updateSOSContacts: updateSOSContacts.updateSOSContacts,
 };
 
 module.exports = middleware;

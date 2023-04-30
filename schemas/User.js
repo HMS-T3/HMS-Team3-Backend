@@ -71,7 +71,13 @@ const user = new mongoose.Schema({
         type: String,
         // required: true,
       },
-      emergencyPhoneNumber: {
+      phoneNumber: {
+        type: String,
+      },
+      email: {
+        type: String,
+      },
+      relation: {
         type: String,
       },
     },
