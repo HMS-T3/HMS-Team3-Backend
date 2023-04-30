@@ -24,7 +24,7 @@ module.exports.getScheduleDetails = async (req, res) => {
       if (r) return r;
       else return false;
     })
-    .catch((e) => console.log(e), false);
+    .catch((e) => false);
 
   if (!doctorExist) return res.status(200).json(msgHandler.fail("Error"));
   else return res.status(200).json(msgHandler.pass(doctorExist.availability));

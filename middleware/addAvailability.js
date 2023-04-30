@@ -50,7 +50,7 @@ module.exports.addAvailability = async (req, res) => {
   })
     .save()
     .then((rid) => {
-      console.log(rid);
+      // console.log(rid);
       User.findOneAndUpdate(
         { _id: doctorId },
         { $push: { availability: rid._id } },
@@ -60,7 +60,7 @@ module.exports.addAvailability = async (req, res) => {
           return res.status(200).json(msgHandler.pass("Availability created"));
         })
         .catch((err) => {
-          console.log("Error", err);
+          // console.log("Error", err);
           return res
             .status(200)
             .json(msgHandler.fail("Availability not created"));
