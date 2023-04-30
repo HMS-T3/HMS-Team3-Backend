@@ -6,6 +6,10 @@ const appointment = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "availability",
   },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
   doctor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
@@ -14,19 +18,7 @@ const appointment = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
   },
-  location: {
-    longitude: {
-      type: Number,
-    },
-    longitude: {
-      type: Number,
-    },
-  },
   reason: {
-    type: String,
-  },
-
-  status: {
     type: String,
   },
   created: {

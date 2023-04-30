@@ -7,18 +7,28 @@ const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
 
 module.exports.getScheduleDetails = async (req, res) => {
-  const { doctor_id } = req.query;
+  const { doctor_id, populate } = req.query;
   const doctorExist = await User.findOne({
     _id: doctor_id,
     role: enums.role_doctor,
   })
     .populate({
-      path: "availability",
+      path: "schedule",
       select: "-_id -__v",
-      populate: {
-        path: "user",
-        select: "email -_id",
-      },
+      populate: populate === "true" && [
+        {
+          path: "timeSlot",
+          select: "-_id -__v",
+        },
+        {
+          path: "doctor",
+          select: "email doctorInfo info ",
+        },
+        {
+          path: "patient",
+          select: "email info ",
+        },
+      ],
     })
     .then((r) => {
       if (r) return r;
@@ -27,5 +37,5 @@ module.exports.getScheduleDetails = async (req, res) => {
     .catch((e) => false);
 
   if (!doctorExist) return res.status(200).json(msgHandler.fail("Error"));
-  else return res.status(200).json(msgHandler.pass(doctorExist.availability));
+  else return res.status(200).json(msgHandler.pass(doctorExist.schedule));
 };

@@ -3,35 +3,31 @@ const msgHandler = require("../functions/msgHandler");
 const logs = require("../logs/logs");
 
 module.exports.getUserDetails = async (req, res) => {
-  const { user_id, role, detailsYouNeed, exceptDetailsYouDonNeed } = req.query;
-  let fields;
-  const newArray = [];
-  if (detailsYouNeed && exceptDetailsYouDonNeed)
-    return res.status(200).json(msgHandler.fail(logs[13]));
+  const { user_id, role, detailsYouNeed, detailsYouDontNeed } = req.query;
+  let newArray = [];
+
   if (detailsYouNeed) {
-    fields = detailsYouNeed;
-    fields.split(" ").forEach((word) => {
-      newArray.push(word);
+    const detailsYouNeedArray = detailsYouNeed.split(",");
+    detailsYouNeedArray.forEach((element) => {
+      newArray.push(element);
     });
   }
-  if (exceptDetailsYouDonNeed) {
-    fields = exceptDetailsYouDonNeed;
-    fields.split(" ").forEach((word) => {
-      newArray.push(`-${word}`);
+  if (detailsYouDontNeed) {
+    const detailsYouDontNeedArray = detailsYouDontNeed.split(",");
+    detailsYouDontNeedArray.forEach((element) => {
+      newArray.push("-" + element);
     });
   }
 
-  newArray.push("-__v");
-  newArray.push("-password");
+  newArray = newArray.filter((e) => e);
 
   await User.findOne(
     {
       _id: user_id,
       role: role,
     },
-    newArray
+    [...newArray, "-password", "-__v"]
   )
-    // .populate("appointments")
     .exec()
     .then((r) =>
       r
