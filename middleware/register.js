@@ -81,12 +81,6 @@ module.exports.patient = async (req, res) => {
 
 module.exports.staff = async (req, res) => {
   const { email, password, role, specializations } = req.body;
-  // console.log(
-  //   "fvbdfb",
-  //   specialization
-  //     .map((doctor) => doctor.specialization)
-  //     .includes(specializations)
-  // );
   if (role === enums.role_doctor) {
     if (!specializations) {
       return res.status(200).json(msgHandler.fail(logs[17]));
@@ -150,6 +144,7 @@ module.exports.staff = async (req, res) => {
         .json(msgHandler.pass({ id: r._id, Message: logs[5] }));
     })
     .catch((err) => {
+      console.log("DVsdv", err);
       if (err) {
         if (err.code === 11000) {
           return res.status(409).json(msgHandler.fail(logs[9]));

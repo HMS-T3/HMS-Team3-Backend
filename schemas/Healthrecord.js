@@ -5,7 +5,6 @@ const healthRecord = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
   },
-
   reasonOfVisit: {
     type: String,
   },
@@ -46,6 +45,10 @@ const healthRecord = new mongoose.Schema({
   prescription: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "prescriptions",
+  },
+  created: {
+    type: Date,
+    default: Date.now,
   },
 });
 

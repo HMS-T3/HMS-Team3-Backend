@@ -44,41 +44,30 @@ module.exports.addAvailability = async (req, res) => {
 
   await new Availability({
     user: doctorId,
-
     day: day,
     time: { startTime: startTime, endTime: endTime },
     booked: false,
   })
     .save()
-    .then(async (r) => {
-      await User.findOne({ _id: doctorId, role: enums.role_doctor })
-        .exec()
-        .then(async (r) => {
-          console.log("fvedfbvf", r);
-          await User.updateOne(
-            { _id: doctorId, role: enums.role_doctor },
-            { availability: r.availability.concat([r._id]) }
-          )
-            .exec()
-            .then((r) => {
-              return res
-                .status(200)
-                .json(msgHandler.pass("User Updated with availability"));
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+    .then((rid) => {
+      console.log(rid);
+      User.findOneAndUpdate(
+        { _id: doctorId },
+        { $push: { availability: rid._id } },
+        { new: true }
+      )
+        .then((r) => {
+          return res.status(200).json(msgHandler.pass("Availability created"));
         })
         .catch((err) => {
-          if (err) {
-            return res
-              .status(500)
-              .json(msgHandler.fail("User not updated availability created"));
-          }
+          console.log("Error", err);
+          return res
+            .status(200)
+            .json(msgHandler.fail("Availability not created"));
         });
     })
     .catch((err) => {
-      //   console.log("Error", err);
+      // console.log("Error", err);
       return res.status(200).json(msgHandler.fail("Availability not created"));
     });
 };

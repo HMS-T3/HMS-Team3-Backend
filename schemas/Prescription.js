@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const prescription = new mongoose.Schema({
   diagnosis: {
     type: String,
-    required: true
+    required: true,
   },
   medicine: [
     {
@@ -37,6 +37,10 @@ const prescription = new mongoose.Schema({
       },
     },
   ],
+  created: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("prescriptions", prescription);

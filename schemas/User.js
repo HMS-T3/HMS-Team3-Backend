@@ -15,6 +15,12 @@ const user = new mongoose.Schema({
     type: String,
     required: true,
   },
+  availability: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "availability",
+    },
+  ],
   doctorInfo: {
     specialization: {
       type: String,
@@ -29,11 +35,6 @@ const user = new mongoose.Schema({
       type: String,
     },
   },
-  availability: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "availability",
-  },
-
   info: {
     //personal info
     profileImg: {
@@ -75,5 +76,9 @@ const user = new mongoose.Schema({
       },
     },
   ],
+  created: {
+    type: Date,
+    default: Date.now,
+  },
 });
 module.exports = mongoose.model("users", user);

@@ -9,21 +9,28 @@ const availability = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
   },
-  availability: {
-    day: {
+
+  day: {
+    type: String,
+  },
+  time: {
+    startTime: {
       type: String,
     },
-    time: {
-      startTime: {
-        type: String,
-      },
-      endTime: {
-        type: String,
-      },
+    endTime: {
+      type: String,
     },
-    booked: {
-      type: Boolean,
-    },
+  },
+  booked: {
+    type: Boolean,
+  },
+  appointment: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "appointments",
+  },
+  created: {
+    type: Date,
+    default: Date.now,
   },
 });
 

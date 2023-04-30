@@ -1,22 +1,31 @@
-const Appointment = require("../handler/models.js").Appointment;
+// const Appointment = require("../handler/models.js").Appointment;
+const User = require("../handler/models.js").User;
+const Availability = require("../handler/models.js").Availability;
+const enums = require("../constants/enum.js");
 
 const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
 
 module.exports.getScheduleDetails = async (req, res) => {
-  const { schedule_id} = req.query;
-
-  const schedule = await Appointment.findOne({
-    _id: schedule_id,
+  const { doctor_id } = req.query;
+  const doctorExist = await User.findOne({
+    _id: doctor_id,
+    role: enums.role_doctor,
   })
-    .populate("doctor")
-    .populate("patient")
-    .then((r) => r)
-    .catch(() => false);
+    .populate({
+      path: "availability",
+      select: "-_id -__v",
+      populate: {
+        path: "user",
+        select: "email -_id",
+      },
+    })
+    .then((r) => {
+      if (r) return r;
+      else return false;
+    })
+    .catch((e) => console.log(e), false);
 
-  if (schedule) {
-    return res.status(200).json(msgHandler.pass(schedule));
-  } else {
-    return res.status(200).json(msgHandler.fail(logs[7]));
-  }
+  if (!doctorExist) return res.status(200).json(msgHandler.fail("Error"));
+  else return res.status(200).json(msgHandler.pass(doctorExist.availability));
 };

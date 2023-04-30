@@ -13,24 +13,22 @@ module.exports.getUserDetails = async (req, res) => {
     fields.split(" ").forEach((word) => {
       newArray.push(word);
     });
-    console.log(newArray);
-    console.log(fields);
   }
   if (exceptDetailsYouDonNeed) {
     fields = exceptDetailsYouDonNeed;
     fields.split(" ").forEach((word) => {
       newArray.push(`-${word}`);
     });
-    console.log(newArray);
-    console.log(fields);
   }
+
+  newArray.push("-__v");
+  newArray.push("-password");
 
   await User.findOne(
     {
       _id: user_id,
       role: role,
     },
-    // [fields, "-__v"]
     newArray
   )
     // .populate("appointments")
