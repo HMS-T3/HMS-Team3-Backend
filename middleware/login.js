@@ -47,7 +47,7 @@ module.exports.patient = async (req, res) => {
     .then(async (user) => {
       if (user) {
         if (user.password === hashed_password) {
-          if (email) await sendMail(email, `Hello ${email}`, logs[20], email);
+          // if (email) await sendMail(email, `Hello ${email}`, logs[20], email);
           return res
             .status(200)
             .json(msgHandler.pass({ id: user.id, Message: logs[5] }));
