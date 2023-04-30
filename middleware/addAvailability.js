@@ -5,7 +5,8 @@ const msgHandler = require("../functions/msgHandler");
 const logs = require("../logs/logs");
 
 module.exports.addAvailability = async (req, res) => {
-  let { doctorId, day, startTime, endTime } = req.body;
+  let { day, startTime, endTime } = req.body;
+  const { doctorId } = req.query;
   const doctorExist = await User.findOne({
     _id: doctorId,
     role: enums.role_doctor,
@@ -14,7 +15,8 @@ module.exports.addAvailability = async (req, res) => {
     .then((r) => (r ? true : false))
     .catch((e) => false);
 
-  if (!doctorExist) return res.status(200).json(msgHandler.fail(logs[10]));
+  if (!doctorExist)
+    return res.status(200).json(msgHandler.fail("Error Finding Doctor"));
 
   const availabilityExist = await Availability.find({
     user: doctorId,

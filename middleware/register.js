@@ -7,6 +7,7 @@ const emailValidator = require("../functions/emailValidator");
 const specialization = require("../constants/specilization.js");
 const sendMail = require("../functions/sendEmail");
 const phoneValidator = require("../functions/phoneValidator.js");
+const _ = require("lodash");
 
 module.exports.patient = async (req, res) => {
   const { email, password, phoneNumber } = req.body;
@@ -80,18 +81,18 @@ module.exports.patient = async (req, res) => {
 };
 
 module.exports.staff = async (req, res) => {
-  const { email, password, role, specializations } = req.body;
+  const { email, password, role } = req.body;
+  let { specializations } = req.body;
+  specializations = _.capitalize(specializations);
   if (role === enums.role_doctor) {
     if (!specializations) {
       return res.status(200).json(msgHandler.fail(logs[17]));
     } else {
-      // if (
-      //   specialization
-      //     .map((doctor) => doctor.specialization)
-      //     .includes(specializations)
-      // ) {
-      //   return res.status(200).json(msgHandler.fail(logs[18]));
-      // }
+      if (
+        !specialization.map((e) => e.specialization).includes(specializations)
+      ) {
+        return res.status(200).json(msgHandler.fail(logs[18]));
+      }
     }
   }
   if (!(await emailValidator(email))) {
