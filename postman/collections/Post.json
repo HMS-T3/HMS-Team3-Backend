@@ -1,0 +1,412 @@
+{
+	"info": {
+		"_postman_id": "462a4e8e-1e7f-480c-acea-057b6f6cbebf",
+		"name": "Post",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "27070532-462a4e8e-1e7f-480c-acea-057b6f6cbebf"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login Staff",
+					"id": "610cee68-5bc2-4a4f-94c2-63fccab7c9c6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "ujjwal@hms-doctor.in",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "{{role_doctor}}",
+									"description": "doctor or nurse  /* Case sensitive\n",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{env}}/login/staff",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"login",
+								"staff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Patient",
+					"id": "afe97a95-1b55-48a8-a8d4-721d23828f6c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "aryansingh920@outlook.com",
+									"type": "text",
+									"description": "Choose Either Email and Password",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "1234567890",
+									"type": "text",
+									"description": "Choose Either Email and Password",
+									"disabled": true
+								},
+								{
+									"key": "phoneNumber",
+									"value": "9287090679",
+									"description": "Choose Password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{env}}/login/patient",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"login",
+								"patient"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "7f3161e0-8b3f-43f5-8d33-50f38e3fd638"
+		},
+		{
+			"name": "Register",
+			"item": [
+				{
+					"name": "Register Staff",
+					"id": "2e17e39b-870f-4350-b67b-0b513af39cc2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "ujjwal@hms-doctor.in",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "{{role_doctor}}",
+									"description": "doctor or nurse  /* Case sensitive\n",
+									"type": "text"
+								},
+								{
+									"key": "specializations",
+									"value": "Immunologists",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{env}}/register/staff",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"register",
+								"staff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Patient",
+					"id": "9c9394db-6b1b-430e-b261-eecaae2e3734",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "rrsingh1101@gmail.com",
+									"type": "text",
+									"description": "Choose Either Email and Password"
+								},
+								{
+									"key": "password",
+									"value": "passwordrr",
+									"type": "text",
+									"description": "Choose Either Email and Password"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "9287090679",
+									"description": "Choose Password",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{env}}/register/patient",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"register",
+								"patient"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "7ecec390-58eb-4035-8bf4-960478bf371a"
+		},
+		{
+			"name": "Doctor",
+			"item": [
+				{
+					"name": "Add Availability of a Doctor",
+					"id": "535b9b44-cf6b-4648-828e-8b0220005d4f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "doctorId",
+									"value": "644eb408eaeced08849a1aed",
+									"type": "text"
+								},
+								{
+									"key": "day",
+									"value": "21-04-2023",
+									"type": "text"
+								},
+								{
+									"key": "startTime",
+									"value": "13:30",
+									"type": "text"
+								},
+								{
+									"key": "endTime",
+									"value": "14:00",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{env}}/addAvailability",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"addAvailability"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "0aea0175-645a-4327-9477-d02c5e80393d"
+		},
+		{
+			"name": "Patient",
+			"item": [
+				{
+					"name": "Book Appointment for Patient",
+					"id": "e643e342-5a93-459d-beb8-97faccd3bb10",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "doctor_id",
+									"value": "644eb408eaeced08849a1aed",
+									"type": "text"
+								},
+								{
+									"key": "patient_id",
+									"value": "644eb82b7ffef4f4d3d8e3dd",
+									"type": "text"
+								},
+								{
+									"key": "reason",
+									"value": "I don’t know ",
+									"type": "text"
+								},
+								{
+									"key": "day",
+									"value": "21-04-2023",
+									"type": "text"
+								},
+								{
+									"key": "startTime",
+									"value": "13:30",
+									"type": "text"
+								},
+								{
+									"key": "endTime",
+									"value": "14:00",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{env}}/book_appointment/patient",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"book_appointment",
+								"patient"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "7406db9f-f6d5-41fd-8147-37534fbe1d63"
+		},
+		{
+			"name": "Update User",
+			"id": "854dd873-2ca8-42de-9d42-8175e1ebacf1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user_id",
+							"value": "644653fda4fe0d1df836f59a",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "{{role_doctor}}",
+							"description": "patient or doctor or nurse",
+							"type": "text"
+						},
+						{
+							"key": "contactNumber",
+							"value": "938727817392",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Ujjwal",
+							"type": "text"
+						},
+						{
+							"key": "dateOfBirth",
+							"value": "{{$timestamp}}",
+							"description": "epooch date",
+							"type": "text"
+						},
+						{
+							"key": "biologicalGender",
+							"value": "Male",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{env}}/update_user_profile/patient",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"update_user_profile",
+						"patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Files",
+			"id": "be3703b1-efda-487d-ac01-58dd1fd72fa9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"description": "It accepts jpeg , png and gif only\n",
+							"type": "file",
+							"src": "/Users/aryansingh/Desktop/pexels-photo-2913125.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{env}}/upload",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

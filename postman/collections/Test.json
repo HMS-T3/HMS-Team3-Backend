@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "95c1a754-9ab7-4332-8aad-cd80a3a4a683",
+		"name": "Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "27070532-95c1a754-9ab7-4332-8aad-cd80a3a4a683"
+	},
+	"item": [
+		{
+			"name": "Date Feed for Doctors and Patients",
+			"id": "cfe97a88-0f09-42b8-a9c1-ab32ec5de5a7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{env}}/test?nums=10&userR=doctor",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"test"
+					],
+					"query": [
+						{
+							"key": "nums",
+							"value": "10"
+						},
+						{
+							"key": "userR",
+							"value": "doctor",
+							"description": "doctor or patient"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
