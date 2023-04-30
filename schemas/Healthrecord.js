@@ -42,6 +42,20 @@ const healthRecord = new mongoose.Schema({
     oxygenLevel: {
       type: Number,
     },
+    steps:{
+      daily:{
+        type: Number,
+      }, 
+      weekly:{
+        type: Number,
+      },
+      monthly:{
+        type: Number,
+      },
+      yearly:{
+        type: Number,
+      },
+    },
   },
   prescription: {
     type: mongoose.Schema.Types.ObjectId,
