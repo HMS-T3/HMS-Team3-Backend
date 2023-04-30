@@ -44,16 +44,48 @@ const healthRecord = new mongoose.Schema({
     },
     steps:{
       daily:{
-        type: Number,
+          startDate:{
+            type: Date,
+          },
+          endDate:{
+            type: Date,
+          },
+          stepCount:{
+            type: Number,
+          },
       }, 
       weekly:{
-        type: Number,
+        startDate:{
+          type: Date,
+        },
+        endDate:{
+          type: Date,
+        },
+        stepCount:{
+          type: Number,
+        },
       },
       monthly:{
-        type: Number,
+        startDate:{
+          type: Date,
+        },
+        endDate:{
+          type: Date,
+        },
+        stepCount:{
+          type: Number,
+        },
       },
       yearly:{
-        type: Number,
+        startDate:{
+          type: Date,
+        },
+        endDate:{
+          type: Date,
+        },
+        stepCount:{
+          type: Number,
+        },
       },
     },
   },
