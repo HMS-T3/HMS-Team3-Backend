@@ -54,6 +54,7 @@ module.exports.addAvailability = async (req, res) => {
       await User.findOne({ _id: doctorId, role: enums.role_doctor })
         .exec()
         .then(async (r) => {
+          console.log("fvedfbvf", r);
           await User.updateOne(
             { _id: doctorId, role: enums.role_doctor },
             { availability: r.availability.concat([r._id]) }
