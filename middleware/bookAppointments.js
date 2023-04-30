@@ -28,20 +28,25 @@ module.exports.bookAppointment = async (req, res) => {
     .exec()
     .then((r) => r)
     .catch((e) => false);
+
   if (patientUser && doctorUser) {
     //check if the doctor is available
+    // console.log("availabilityExist", availabilityExist, "doctor_id", doctor_id);
+
     const availabilityExist = await Availability.findOne({
       user: doctor_id,
       day: day,
       time: { startTime: startTime, endTime: endTime },
     })
       .exec()
-      .then((r) => (r ? r.booked : true))
-      .catch((e) => true);
+      .then((r) => (r ? r.booked : false))
+      .catch((e) => false);
+    // console.log("availabilityExist", availabilityExist, "doctor_id", doctor_id);
+
     if (availabilityExist)
       return res
         .status(200)
-        .json(msgHandler.fail(logs["Some One Already booked the slots"]));
+        .json(msgHandler.fail("Some One Already booked the slots"));
     else
       await Availability.findOneAndUpdate(
         {
@@ -63,7 +68,7 @@ module.exports.bookAppointment = async (req, res) => {
               .then((r) => (r ? true : false))
               .catch((e) => false);
             if (appointmentExist)
-              return res.status(200).json(msgHandler.fail(logs[16]));
+              return res.status(200).json(msgHandler.fail("Already Booked"));
             else
               await new Appointment({
                 timeSlot: r._id,
@@ -108,11 +113,17 @@ module.exports.bookAppointment = async (req, res) => {
                   return res.status(200).json(msgHandler.fail(e));
                 });
           } else {
-            return res.status(200).json(msgHandler.fail(logs[14]));
+            return res
+              .status(200)
+              .json(
+                msgHandler.fail("Availability Not Found of provided doctor")
+              );
           }
         })
         .catch((e) => {
-          return res.status(200).json(msgHandler.fail(e));
+          return res
+            .status(200)
+            .json(msgHandler.fail("Availability Not Found of provided doctor"));
         });
   } else {
     return res.status(200).json(msgHandler.fail(logs[12]));

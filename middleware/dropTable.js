@@ -75,7 +75,7 @@ module.exports.dropTable = async (req, res) => {
       .catch((error) => {
         console.log(error);
       });
-    Prescription.collection
+    Appointment.collection
       .drop()
       .then(() => {
         console.log("Collection dropped successfully");
