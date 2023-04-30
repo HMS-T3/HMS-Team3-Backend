@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "9b428d24-d263-4222-be7d-0e4308aa5075",
+		"name": "Get",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "27070532-9b428d24-d263-4222-be7d-0e4308aa5075"
+	},
+	"item": [
+		{
+			"name": "Doctor",
+			"item": [
+				{
+					"name": "Get Doctor's Schedule Details",
+					"id": "e328d16e-d76f-435f-b3f2-0f421b311004",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{env}}/get_schedule_details?doctor_id=644eb408eaeced08849a1aed&populate=false",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"get_schedule_details"
+							],
+							"query": [
+								{
+									"key": "doctor_id",
+									"value": "644eb408eaeced08849a1aed"
+								},
+								{
+									"key": "populate",
+									"value": "true",
+									"description": "any one has to be checked",
+									"disabled": true
+								},
+								{
+									"key": "populate",
+									"value": "false",
+									"description": "any one has to be checked"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctors",
+					"id": "940c0327-558e-4550-a298-e22c7f9d2479",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{env}}/get_doctors",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"get_doctors"
+							],
+							"query": [
+								{
+									"key": "Specializations",
+									"value": "Immunologists",
+									"description": "Accept keys from /Get All Specilizations",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "97c824b0-e2b3-42f5-ad46-abcfd99cf94a"
+		},
+		{
+			"name": "Patient",
+			"item": [
+				{
+					"name": "Get Appointment Details",
+					"id": "a954aa54-0049-47e6-bf11-53963bc42c81",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{env}}/get_appointment_details?patientId=644eb41aeaeced08849a1af0&populate=true",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"get_appointment_details"
+							],
+							"query": [
+								{
+									"key": "patientId",
+									"value": "644eb41aeaeced08849a1af0"
+								},
+								{
+									"key": "populate",
+									"value": "true",
+									"description": "any one has to be checked"
+								},
+								{
+									"key": "populate",
+									"value": "false",
+									"description": "any one has to be checked",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "9f14eb6f-fb74-45eb-9b7c-ee945a358875"
+		},
+		{
+			"name": "DropTable",
+			"item": [
+				{
+					"name": "Drop Table",
+					"id": "8311a1c5-7881-4f63-bbe0-939defb1365f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{env}}/dropTable?tableToDrop=all",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"dropTable"
+							],
+							"query": [
+								{
+									"key": "tableToDrop",
+									"value": "all"
+								},
+								{
+									"key": "tableToDrop",
+									"value": "users",
+									"disabled": true
+								},
+								{
+									"key": "tableToDrop",
+									"value": "appointments",
+									"disabled": true
+								},
+								{
+									"key": "tableToDrop",
+									"value": "availabilities",
+									"disabled": true
+								},
+								{
+									"key": "tableToDrop",
+									"value": "prescription",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "21235c89-f429-43e2-aa9f-0b4181f43702"
+		},
+		{
+			"name": "Root",
+			"id": "59ac5424-f22a-4a9a-84f3-81d107e35c57",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{env}}",
+					"host": [
+						"{{env}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Details",
+			"id": "495b7ed5-20be-42c7-9806-c72cb0161450",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{env}}/getUserDetails?user_id=644eb408eaeced08849a1aed&role={{role_doctor}}&detailsYouDontNeed=_id,appointments,emergencyContacts",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"getUserDetails"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "644eb408eaeced08849a1aed"
+						},
+						{
+							"key": "role",
+							"value": "{{role_doctor}}",
+							"description": "{{role_patient}} or {{role_doctor}}"
+						},
+						{
+							"key": "detailsYouDontNeed",
+							"value": "_id,appointments,emergencyContacts",
+							"description": "Will return everything except the field chosen"
+						},
+						{
+							"key": "detailsYouNeed",
+							"value": "email",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Specilizations",
+			"id": "7f0b2af4-35ef-4c1d-82b0-eff73097d5e5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{env}}/get_specializations",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"get_specializations"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
