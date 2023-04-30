@@ -11,7 +11,7 @@ module.exports.updateSOSContacts = async (req, res) => {
   await User.findOneAndUpdate(
     {
       _id: user_id,
-      role: enums.roles.patient,
+      role: enums.role_patient,
     },
     {
       $push: {
@@ -24,12 +24,39 @@ module.exports.updateSOSContacts = async (req, res) => {
       },
     }
   )
-    .then((user) => {
+    .then(async (user) => {
       //   logs.logInfo("updateSOSContacts", "User updated successfully", user);
-      msgHandler.pass("User updated successfully");
+      //if there were 2 contacts before then remove the first one
+      if (user.emergencyContacts.length >= 2) {
+        await User.findOneAndUpdate(
+          {
+            _id: user_id,
+            role: enums.role_patient,
+          },
+          {
+            $pop: {
+              emergencyContacts: -1,
+            },
+          }
+        )
+          .then((user) => {
+            //   logs.logInfo("updateSOSContacts", "User updated successfully", user);
+            res
+              .status(200)
+              .json(
+                msgHandler.pass(
+                  "User updated successfully removed first contact"
+                )
+              );
+          })
+          .catch((err) => {
+            //   logs.logError("updateSOSContacts", "Error updating user", err);
+            res.status(200).json(msgHandler.fail("Error updating user"));
+          });
+      } else res.status(200).json(msgHandler.pass("User updated successfully"));
     })
     .catch((err) => {
       //   logs.logError("updateSOSContacts", "Error updating user", err);
-      msgHandler.fail("Error updating user");
+      res.status(200).json(msgHandler.fail("Error updating user"));
     });
 };
