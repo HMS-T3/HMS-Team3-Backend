@@ -7,7 +7,9 @@ const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
 
 module.exports.bookAppointment = async (req, res) => {
-  const { patient_id, doctor_id, reason, day, startTime, endTime } = req.body;
+  const { doctor_id, reason, day, startTime, endTime } = req.body;
+  const { patient_id } = req.query;
+
   const patientUser = await User.findOne(
     {
       _id: patient_id,
@@ -30,9 +32,6 @@ module.exports.bookAppointment = async (req, res) => {
     .catch((e) => false);
 
   if (patientUser && doctorUser) {
-    //check if the doctor is available
-    // console.log("availabilityExist", availabilityExist, "doctor_id", doctor_id);
-
     const availabilityExist = await Availability.findOne({
       user: doctor_id,
       day: day,
@@ -41,7 +40,6 @@ module.exports.bookAppointment = async (req, res) => {
       .exec()
       .then((r) => (r ? r.booked : false))
       .catch((e) => false);
-    // console.log("availabilityExist", availabilityExist, "doctor_id", doctor_id);
 
     if (availabilityExist)
       return res
