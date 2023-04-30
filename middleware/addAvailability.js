@@ -5,7 +5,7 @@ const msgHandler = require("../functions/msgHandler");
 const logs = require("../logs/logs");
 
 module.exports.addAvailability = async (req, res) => {
-  const { doctorId, day, startTime, endTime } = req.body;
+  let { doctorId, day, startTime, endTime } = req.body;
   const doctorExist = await User.findOne({
     _id: doctorId,
     role: enums.role_doctor,
@@ -16,52 +16,57 @@ module.exports.addAvailability = async (req, res) => {
 
   if (!doctorExist) return res.status(200).json(msgHandler.fail(logs[10]));
 
-  //check if the doctor already has an availability on the same day and same time
   const availabilityExist = await Availability.find({
     user: doctorId,
   })
     .exec()
     .then((r) => {
-      console.log("Avail", r);
-      //only return the availability that has the same day and time
-      let resp = r.filter((a) => {
-        console.log("a", a);
+      let startTimes = r.map((r) => r.time.startTime);
+      let endTimes = r.map((r) => r.time.endTime);
+      let days = r.map((r) => r.day);
+      if (r) {
         if (
-          a.availability.day === day &&
-          a.availability.time.startTime === startTime &&
-          a.availability.time.endTime === endTime
-        )
+          startTimes.includes(startTime) &&
+          endTimes.includes(endTime) &&
+          days.includes(day)
+        ) {
           return true;
-        else return false;
-      });
-      console.log("r", resp);
-      return r ? true : false;
-    })
-    .catch((e) => false);
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    });
 
   if (availabilityExist)
-    return res.status(200).json(msgHandler.fail("Already booked"));
+    return res.status(200).json(msgHandler.fail("Already Slot Exists"));
 
   await new Availability({
     user: doctorId,
-    availability: {
-      day: day,
-      time: { startTime: startTime, endTime: endTime },
-      booked: false,
-    },
+
+    day: day,
+    time: { startTime: startTime, endTime: endTime },
+    booked: false,
   })
     .save()
     .then(async (r) => {
-      await User.findOneAndUpdate(
-        { _id: doctorId, role: enums.role_doctor },
-        { $push: { availability: r._id } },
-        { new: true }
-      )
+      await User.findOne({ _id: doctorId, role: enums.role_doctor })
         .exec()
-        .then((r) => {
-          return res
-            .status(200)
-            .json(msgHandler.pass("User Updated with availability"));
+        .then(async (r) => {
+          await User.updateOne(
+            { _id: doctorId, role: enums.role_doctor },
+            { availability: r.availability.concat([r._id]) }
+          )
+            .exec()
+            .then((r) => {
+              return res
+                .status(200)
+                .json(msgHandler.pass("User Updated with availability"));
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           if (err) {
