@@ -1,6 +1,7 @@
 const User = require("../handler/models.js").User;
 const axios = require("axios");
 const specialization = require("../constants/specilization.js");
+const hash = require("../functions/hash");
 
 function removeUnderscore(str) {
   return str.replace(/_/g, " ");
@@ -25,7 +26,7 @@ module.exports.addData = async (req, res) => {
   for (let i = 0; i < response.length; i++) {
     let obj = {};
     if (userR === "doctor")
-      obj["specialization"] = removeUnderscore(
+      obj["doctorInfo"]["specialization"] = removeUnderscore(
         Object.keys(specialization)[
           Math.floor(Math.random() * specialization.length)
         ]
@@ -45,9 +46,11 @@ module.exports.addData = async (req, res) => {
       phoneNumber: response[i]["phone"],
       biologicalGender: response[i]["gender"],
     };
-    obj[
-      "password"
-    ] = `${response[i]["login"]["password"]}${response[i]["login"]["password"]}`;
+    obj["password"] = `${hash(
+      response[i]["email"],
+      response[i]["login"]["password"],
+      userR
+    )}`;
     const user = new User(obj);
     await user
       .save()

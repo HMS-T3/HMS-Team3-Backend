@@ -13,4 +13,6 @@ module.exports = {
   getDoctors: "/get_doctors",
   test: "/test",
   upload: "/upload",
+  addAvailability: "/addAvailability",
+  dropTable: "/dropTable",
 };
