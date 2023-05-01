@@ -66,6 +66,15 @@ module.exports.addUsers = async (req, res) => {
 };
 
 module.exports.getTimeSlots = async (req, res) => {
-  const { f, t } = req.query;
-  res.send(generateTimeSlots(parseInt(f), parseInt(t)));
+  const { f, t, getSlots } = req.query;
+  //pair two adjacent elements of the array to form a time slot from generateTimeSlots(parseInt(f), parseInt(t))
+  const timeSlots = generateTimeSlots(parseInt(f), parseInt(t));
+  const timeSlotPairs = [];
+
+  for (let i = 0; i < timeSlots.length - 1; i++) {
+    const timeSlotPair = [timeSlots[i], timeSlots[i + 1]];
+    timeSlotPairs.push(timeSlotPair);
+  }
+
+  res.send(getSlots === "true" ? timeSlotPairs : timeSlots);
 };
