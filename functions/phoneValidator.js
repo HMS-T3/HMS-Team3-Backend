@@ -1,5 +1,8 @@
 module.exports = function (phone) {
-  const phoneRegex = /^(\+91|0)?[789]\d{9}$/;
-  // return phoneRegex.test(phone);
-  return true;
+  const regex = /^(\+91[\s]?)?[0]?(91)?[6789]\d{9}$/;
+  if (regex.test(phone)) {
+    return true;
+  } else {
+    return false;
+  }
 };

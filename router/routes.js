@@ -1,4 +1,4 @@
-module.exports = {
+module.exports.app = {
   root: "/",
   loginPatient: "/login/patient",
   loginStaff: "/login/staff",
@@ -11,9 +11,14 @@ module.exports = {
   get_schedule_details: "/get_schedule_details",
   getSpecialization: "/get_specializations",
   getDoctors: "/get_doctors",
-  test: "/test",
   upload: "/upload",
   addAvailability: "/addAvailability",
   dropTable: "/dropTable",
   updateSOSContacts: "/updateSOSContacts",
+  getSOSContacts: "/getSOSContacts",
+};
+
+module.exports.test = {
+  addUsers: "/addUsers",
+  getTimeSlots: "/getTimeSlots",
 };

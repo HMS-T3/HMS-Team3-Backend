@@ -19,6 +19,7 @@ module.exports.getScheduleDetails = async (req, res) => {
         {
           path: "timeSlot",
           select: "-_id -__v",
+          sort: { startTime: 1 },
         },
         {
           path: "doctor",
@@ -30,6 +31,8 @@ module.exports.getScheduleDetails = async (req, res) => {
         },
       ],
     })
+    .sort({ "schedule.timeSlot.time.endTime": 1 })
+    // .exec()
     .then((r) => {
       if (r) return r;
       else return false;

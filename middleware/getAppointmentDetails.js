@@ -11,10 +11,10 @@ module.exports.getAppointmentDetails = async (req, res) => {
     _id: patientId,
     role: enums.role_patient,
   })
+    // .sort({ timeSlot.startTime: 1 })
     .populate({
       path: "appointments",
       select: "-_id -__v",
-
       populate: populate === "true" && [
         {
           path: "doctor",
@@ -30,6 +30,8 @@ module.exports.getAppointmentDetails = async (req, res) => {
         },
       ],
     })
+    .sort({ "appointments.timeSlot.time.endTime": 1 })
+    // .exec()
     .then((r) => {
       // console.log(r);
       if (r) return r;

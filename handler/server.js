@@ -81,6 +81,7 @@ app.use("*", (req, res, next) => {
 });
 
 app.use("/app", routes.app);
+app.use("/test", routes.test);
 
 const PORT = 3000 || process.env.PORT;
 app.listen(PORT, (req, res) => {
