@@ -1,15 +1,23 @@
 const logs = require("../logs/logs");
 
 module.exports.pass = (msg) => {
-  return {
-    Response: msg,
-    Status: logs.pass,
-  };
+  if (typeof msg === "string") {
+    return { Response: { Message: msg }, Status: logs.pass };
+  } else {
+    return {
+      Response: msg,
+      Status: logs.pass,
+    };
+  }
 };
 
 module.exports.fail = (msg) => {
-  return {
-    Response: { Message: msg },
-    Status: logs.fail,
-  };
+  if (typeof msg === "string") {
+    return { Response: { Message: msg }, Status: logs.pass };
+  } else {
+    return {
+      Response: msg,
+      Status: logs.pass,
+    };
+  }
 };
