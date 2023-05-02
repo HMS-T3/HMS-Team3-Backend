@@ -8,6 +8,8 @@ const specialization = require("../constants/specilization.js");
 const sendMail = require("../functions/sendEmail");
 const phoneValidator = require("../functions/phoneValidator.js");
 const _ = require("lodash");
+const axios = require("axios");
+var qs = require("qs");
 
 module.exports.patient = async (req, res) => {
   const { email, password, phoneNumber } = req.body;
@@ -65,6 +67,7 @@ module.exports.patient = async (req, res) => {
       if (email) {
         await sendMail(email, `Hello ${email}`, logs[20], email);
       }
+
       return res
         .status(200)
         .json(msgHandler.pass({ id: r.id, Message: logs[5] }));
@@ -133,19 +136,58 @@ module.exports.staff = async (req, res) => {
     },
   })
     .save()
-    .then(async (r) => {
-      await sendMail(
-        email,
-        `Hello ${email}`,
-        "You have successfully logged in to your account.",
-        email
-      );
+    .then(async (rid) => {
+      // await sendMail(
+      //   email,
+      //   `Hello ${email}`,
+      //   "You have successfully logged in to your account.",
+      //   email
+      // );
+      var config = {
+        method: "get",
+        url: "https://hmst3-backend.onrender.com/test/getTimeSlots?f=9&t=15&getSlots=true",
+      };
+
+      const dates = await axios(config)
+        .then(function (response) {
+          return response.data;
+        })
+        .catch(function (error) {
+          return error;
+        });
+
+      //for each loop
+      // console.log(dates[0].length, dates[0]);
+      dates.forEach(async (date) => {
+        console.log(rid.id);
+        // console.log(date);
+        var data = {
+          day: "21-04-2023",
+          startTime: date[0],
+          endTime: date[1],
+        };
+        var config = {
+          method: "post",
+          url: `https://hmst3-backend.onrender.com/app/addAvailability?doctorId=${rid.id}`,
+          data: data,
+        };
+
+        console.log(config, data);
+
+        await axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      });
+
       return res
         .status(200)
         .json(msgHandler.pass({ id: r._id, Message: logs[5] }));
     })
     .catch((err) => {
-      // console.log("DVsdv", err);
       if (err) {
         if (err.code === 11000) {
           return res.status(409).json(msgHandler.fail(logs[9]));
