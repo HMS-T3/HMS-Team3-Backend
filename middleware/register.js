@@ -137,51 +137,51 @@ module.exports.staff = async (req, res) => {
   })
     .save()
     .then(async (rid) => {
-      // await sendMail(
-      //   email,
-      //   `Hello ${email}`,
-      //   "You have successfully logged in to your account.",
-      //   email
-      // );
-      var config = {
-        method: "get",
-        url: "https://hmst3-backend.onrender.com/test/getTimeSlots?f=9&t=15&getSlots=true",
-      };
+      await sendMail(
+        email,
+        `Hello ${email}`,
+        "You have successfully logged in to your account.",
+        email
+      );
+      // var config = {
+      //   method: "get",
+      //   url: "https://hmst3-backend.onrender.com/test/getTimeSlots?f=9&t=15&getSlots=true",
+      // };
 
-      const dates = await axios(config)
-        .then(function (response) {
-          return response.data;
-        })
-        .catch(function (error) {
-          return error;
-        });
+      // const dates = await axios(config)
+      //   .then(function (response) {
+      //     return response.data;
+      //   })
+      //   .catch(function (error) {
+      //     return error;
+      //   });
 
-      //for each loop
-      // console.log(dates[0].length, dates[0]);
-      dates.forEach(async (date) => {
-        console.log(rid.id);
-        // console.log(date);
-        var data = {
-          day: "21-04-2023",
-          startTime: date[0],
-          endTime: date[1],
-        };
-        var config = {
-          method: "post",
-          url: `https://hmst3-backend.onrender.com/app/addAvailability?doctorId=${rid.id}`,
-          data: data,
-        };
+      // //for each loop
+      // // console.log(dates[0].length, dates[0]);
+      // dates.forEach(async (date) => {
+      //   console.log(rid.id);
+      //   // console.log(date);
+      //   var data = {
+      //     day: "21-04-2023",
+      //     startTime: date[0],
+      //     endTime: date[1],
+      //   };
+      //   var config = {
+      //     method: "post",
+      //     url: `https://hmst3-backend.onrender.com/app/addAvailability?doctorId=${rid.id}`,
+      //     data: data,
+      //   };
 
-        console.log(config, data);
+      //   console.log(config, data);
 
-        await axios(config)
-          .then(function (response) {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      });
+      //   await axios(config)
+      //     .then(function (response) {
+      //       console.log(JSON.stringify(response.data));
+      //     })
+      //     .catch(function (error) {
+      //       console.log(error);
+      //     });
+      // });
 
       return res
         .status(200)
