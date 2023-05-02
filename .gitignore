@@ -2,3 +2,5 @@
 /.env
 /run.sh
 /.DS_Store
+*.sh
+
