@@ -65,7 +65,7 @@ module.exports.patient = async (req, res) => {
 
 module.exports.staff = async (req, res) => {
   const { email, password, role } = req.body;
-  if (!(await emailValidator(email))) {
+  if (!(emailValidator(email))) {
     return res.status(200).json(msgHandler.fail(logs[11]));
   }
   if (password.length < 7) {

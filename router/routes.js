@@ -17,6 +17,7 @@ module.exports.app = {
   updateSOSContacts: "/updateSOSContacts",
   getSOSContacts: "/getSOSContacts",
   getAvailableTimeSlots: "/getAvailableTimeSlots", 
+  search: "/search"
 };
 
 module.exports.test = {

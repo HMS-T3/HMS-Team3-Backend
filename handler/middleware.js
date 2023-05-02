@@ -14,6 +14,7 @@ const dropTable = require("../middleware/dropTable");
 const updateSOSContacts = require("../middleware/updateSOSContacts");
 const getSOSContacts = require("../middleware/getSOSContacts");
 const getAvailableTimeSlots = require("../middleware/getAvailableTimeSlots");
+const search = require("../middleware/search");
 
 const middleware = {
   home: home.home,
@@ -34,6 +35,7 @@ const middleware = {
   updateSOSContacts: updateSOSContacts.updateSOSContacts,
   getSOSContacts: getSOSContacts.getSOSContacts,
   getAvailableTimeSlots: getAvailableTimeSlots.getAvailableTimeSlots,
+  search: search.search
 };
 
 module.exports = middleware;
