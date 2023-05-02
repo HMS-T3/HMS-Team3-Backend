@@ -32,16 +32,12 @@ module.exports.getScheduleDetails = async (req, res) => {
       ],
     })
     .sort({ "schedule.timeSlot.time.endTime": 1 })
-    // .exec()
     .then((r) => {
-      // console.log(r);
-      console.log(r.schedule);
       r.schedule.length > 0
         ? res.status(200).json(msgHandler.pass(r.schedule))
         : res.status(200).json(msgHandler.pass(r));
     })
     .catch((e) => {
-      console.log(e);
-      res.status(200).json(msgHandler.fail(e));
+      res.status(200).json(msgHandler.fail("Some Error"));
     });
 };

@@ -31,18 +31,12 @@ module.exports.getAppointmentDetails = async (req, res) => {
       ],
     })
     .sort({ "appointments.timeSlot.time.endTime": 1 })
-    // .exec()
     .then((r) => {
-      // console.log(r);
-      if (r) return r;
-      else return false;
+      r.schedule.length > 0
+        ? res.status(200).json(msgHandler.pass(r.availability))
+        : res.status(200).json(msgHandler.pass(r));
     })
-    .catch((e) => console.log(e), false);
-
-  if (!AppointmentDetails)
-    return res.status(200).json(msgHandler.fail("Error"));
-  else
-    return res
-      .status(200)
-      .json(msgHandler.pass(AppointmentDetails.appointments));
+    .catch((e) => {
+      res.status(200).json(msgHandler.fail("Some Error"));
+    });
 };
