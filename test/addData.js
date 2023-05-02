@@ -3,6 +3,7 @@ const axios = require("axios");
 const specialization = require("../constants/specilization.js");
 const hash = require("../functions/hash");
 const generateTimeSlots = require("../functions/generateTimesSlots");
+const addAvailability = require("../functions/addAvailability");
 
 function removeUnderscore(str) {
   return str.replace(/_/g, " ");
@@ -13,7 +14,7 @@ function removeSeparators(str) {
 }
 
 module.exports.addUsers = async (req, res) => {
-  const { nums, userR } = req.query;
+  const { nums, userR, wantAddAvailability, day, from, to } = req.query;
 
   const response = await axios
     .get(`https://randomuser.me/api/?results=${nums}`)
@@ -58,7 +59,18 @@ module.exports.addUsers = async (req, res) => {
     const user = new User(obj);
     await user
       .save()
-      .then((r) => (flag = true))
+      .then(async (r) => {
+        wantAddAvailability === "true" &&
+          (await addAvailability(
+            `${req.protocol + "://" + req.get("host")}`,
+            r.id,
+            day,
+            from,
+            to
+          ));
+
+        flag = true;
+      })
       .catch((e) => res.send(e));
   }
 

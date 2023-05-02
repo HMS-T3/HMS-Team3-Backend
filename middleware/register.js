@@ -8,8 +8,7 @@ const specialization = require("../constants/specilization.js");
 const sendMail = require("../functions/sendEmail");
 const phoneValidator = require("../functions/phoneValidator.js");
 const _ = require("lodash");
-const axios = require("axios");
-var qs = require("qs");
+const addAvailability = require("../functions/addAvailability");
 
 module.exports.patient = async (req, res) => {
   const { email, password, phoneNumber } = req.body;
@@ -86,6 +85,7 @@ module.exports.patient = async (req, res) => {
 module.exports.staff = async (req, res) => {
   const { email, password, role } = req.body;
   let { specializations } = req.body;
+  const { wantAddAvailability, day, from, to } = req.query;
   specializations = _.capitalize(specializations);
   if (role === enums.role_doctor) {
     if (!specializations) {
@@ -137,51 +137,23 @@ module.exports.staff = async (req, res) => {
   })
     .save()
     .then(async (rid) => {
+      wantAddAvailability === "true" &&
+        (await addAvailability(
+          `${req.protocol + "://" + req.get("host")}`,
+          rid.id,
+          day,
+          from,
+          to
+        ));
+
       await sendMail(
         email,
         `Hello ${email}`,
         "You have successfully logged in to your account.",
         email
       );
-      var config = {
-        method: "get",
-        url: "https://hmst3-backend.onrender.com/test/getTimeSlots?f=9&t=15&getSlots=true",
-      };
 
-      const dates = await axios(config)
-        .then(function (response) {
-          return response.data;
-        })
-        .catch(function (error) {
-          return error;
-        });
-
-      //for each loop
-      // console.log(dates[0].length, dates[0]);
-      dates.forEach(async (date) => {
-        console.log(rid.id);
-        // console.log(date);
-        var data = {
-          day: "21-04-2023",
-          startTime: date[0],
-          endTime: date[1],
-        };
-        var config = {
-          method: "post",
-          url: `https://hmst3-backend.onrender.com/app/addAvailability?doctorId=${rid.id}`,
-          data: data,
-        };
-
-        console.log(config, data);
-
-        await axios(config)
-          .then(function (response) {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      });
+      // console.log();
 
       return res
         .status(200)
