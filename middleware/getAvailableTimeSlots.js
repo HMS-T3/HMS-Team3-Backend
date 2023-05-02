@@ -21,7 +21,7 @@ module.exports.getAvailableTimeSlots = async (req, res, next) => {
         });
       availability.length > 0
         ? res.status(200).json(msgHandler.pass(availability))
-        : res.status(200).json(msgHandler.pass([r]));
+        : res.status(200).json(msgHandler.pass(null));
     })
     .catch((e) => {
       res.status(200).json(msgHandler.fail("Some Error"));
