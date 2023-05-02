@@ -34,7 +34,7 @@ module.exports.getAppointmentDetails = async (req, res) => {
     .then((r) => {
       r.schedule.length > 0
         ? res.status(200).json(msgHandler.pass(r.availability))
-        : res.status(200).json(msgHandler.pass(r));
+        : res.status(200).json(msgHandler.pass([r]));
     })
     .catch((e) => {
       res.status(200).json(msgHandler.fail("Some Error"));
