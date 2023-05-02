@@ -32,7 +32,7 @@ module.exports.getAppointmentDetails = async (req, res) => {
     })
     .sort({ "appointments.timeSlot.time.endTime": 1 })
     .then((r) => {
-      r.schedule.length > 0
+      r.availability.length > 0
         ? res.status(200).json(msgHandler.pass(r.availability))
         : res.status(200).json(msgHandler.pass(null));
     })
