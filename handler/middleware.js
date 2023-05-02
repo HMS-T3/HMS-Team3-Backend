@@ -13,6 +13,7 @@ const addAvailability = require("../middleware/addAvailability");
 const dropTable = require("../middleware/dropTable");
 const updateSOSContacts = require("../middleware/updateSOSContacts");
 const getSOSContacts = require("../middleware/getSOSContacts");
+const getAvailableTimeSlots = require("../middleware/getAvailableTimeSlots");
 
 const middleware = {
   home: home.home,
@@ -32,6 +33,7 @@ const middleware = {
   dropTable: dropTable.dropTable,
   updateSOSContacts: updateSOSContacts.updateSOSContacts,
   getSOSContacts: getSOSContacts.getSOSContacts,
+  getAvailableTimeSlots: getAvailableTimeSlots.getAvailableTimeSlots,
 };
 
 module.exports = middleware;
