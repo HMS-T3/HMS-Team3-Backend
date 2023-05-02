@@ -20,6 +20,7 @@ router
   .get(routes.getSOSContacts, middleware.getSOSContacts)
   .get(routes.getAvailableTimeSlots, middleware.getAvailableTimeSlots)
   .get(routes.search, middleware.search)
+  .get(routes.addBulkAvailability, middleware.addBulkAvailability)
   //post
   .post(routes.upload, upload.single("file"), middleware.upload)
   .post(routes.loginPatient, middleware.login_patient)
