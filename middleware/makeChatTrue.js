@@ -1,6 +1,8 @@
 const User = require("../handler/models.js").User;
 const enums = require("../constants/enum.js");
 const Appointment = require("../handler/models.js").Appointment;
+const Availability = require("../handler/models.js").Availability;
+const msgHandler = require("../functions/msgHandler");
 
 module.exports.makeChatTrue = async (req, res) => {
   const { patient_id, day, fromTime, endTime } = req.body;
@@ -27,14 +29,16 @@ module.exports.makeChatTrue = async (req, res) => {
     .catch((e) => false);
 
   if (!doctorExist || !patientExist)
-    return res.status(200).json(msgHandler.fail("Error"));
+    return res.status(200).json(msgHandler.fail("Error1"));
   //   else return res.status(200).json(msgHandler.pass("Success"));
   else {
     const availability = await Availability.findOne({
-      doctor: doctor_id,
+      user: doctor_id,
       day: day,
-      "time.startTime": fromTime,
-      "time.endTime": endTime,
+      time: {
+        startTime: fromTime,
+        endTime: endTime,
+      },
     })
       .then((r) => {
         if (r) return r;
@@ -42,7 +46,7 @@ module.exports.makeChatTrue = async (req, res) => {
       })
       .catch((e) => false);
 
-    if (!availability) return res.status(200).json(msgHandler.fail("Error"));
+    if (!availability) return res.status(200).json(msgHandler.fail("Error2"));
     else
       await Appointment.findOneAndUpdate(
         {
@@ -54,8 +58,8 @@ module.exports.makeChatTrue = async (req, res) => {
       )
         .then((r) => {
           if (r) return res.status(200).json(msgHandler.pass("Success"));
-          else return res.status(200).json(msgHandler.fail("Error"));
+          else return res.status(200).json(msgHandler.fail("Error3"));
         })
-        .catch((e) => res.status(200).json(msgHandler.fail("Error")));
+        .catch((e) => res.status(200).json(msgHandler.fail("Error4")));
   }
 };
