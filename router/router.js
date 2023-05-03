@@ -31,7 +31,8 @@ router
   .post(routes.book_appointment, middleware.book_appointment)
   .post(routes.update_user_profile, middleware.update_user_profile)
   .post(routes.addAvailability, middleware.addAvailability)
-  .post(routes.updateSOSContacts, middleware.updateSOSContacts);
+  .post(routes.updateSOSContacts, middleware.updateSOSContacts)
+  .post(routes.makeChatTrue, middleware.makeChatTrue);
 
 testrouter
   .get(testRoutes.addUsers, testMiddleware.addUsers)

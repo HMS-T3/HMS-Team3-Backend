@@ -10,6 +10,10 @@ const appointment = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  chat: {
+    type: Boolean,
+    default: false,
+  },
   doctor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",

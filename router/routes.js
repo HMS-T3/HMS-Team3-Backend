@@ -20,6 +20,7 @@ module.exports.app = {
   getAvailableTimeSlots: "/getAvailableTimeSlots",
   search: "/search",
   addBulkAvailability: "/addBulkAvailability",
+  makeChatTrue: "/makeChatTrue",
 };
 
 module.exports.test = {

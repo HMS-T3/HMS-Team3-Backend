@@ -17,6 +17,7 @@ const getAvailableTimeSlots = require("../middleware/getAvailableTimeSlots");
 const search = require("../middleware/search");
 const getScheduleDetailsForADay = require("../middleware/getScheduleDetailsForADay");
 const addBulkAvailability = require("../middleware/addBulkAvailability");
+const makeChatTrue = require("../middleware/makeChatTrue");
 
 const middleware = {
   home: home.home,
@@ -38,8 +39,10 @@ const middleware = {
   getSOSContacts: getSOSContacts.getSOSContacts,
   getAvailableTimeSlots: getAvailableTimeSlots.getAvailableTimeSlots,
   search: search.search,
-  getScheduleDetailsForADay: getScheduleDetailsForADay.getScheduleDetailsForADay,
+  getScheduleDetailsForADay:
+    getScheduleDetailsForADay.getScheduleDetailsForADay,
   addBulkAvailability: addBulkAvailability.addBulkAvailability,
+  makeChatTrue: makeChatTrue.makeChatTrue,
 };
 
 module.exports = middleware;
