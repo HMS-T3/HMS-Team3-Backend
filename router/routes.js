@@ -17,7 +17,8 @@ module.exports.app = {
   updateSOSContacts: "/updateSOSContacts",
   getSOSContacts: "/getSOSContacts",
   getAvailableTimeSlots: "/getAvailableTimeSlots", 
-  search: "/search"
+  search: "/search",
+  getScheduleDetailsForADay: "/getScheduleDetailsForADay",
 };
 
 module.exports.test = {
