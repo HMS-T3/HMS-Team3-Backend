@@ -18,11 +18,11 @@ module.exports.upload = async (req, res) => {
     .then(async (result) => {
       try {
         await fs.unlinkSync(req.file.path);
-        console.log("File deleted!");
+        // console.log("File deleted!");
       } catch (err) {
         console.error(err);
       }
-      res.send(result);
+      res.status(200).json(msgHandler.pass({Message: "The link is", Link: result}));
     })
     .catch((error) => {
       res.send(error);
