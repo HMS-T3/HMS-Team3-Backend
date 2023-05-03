@@ -4,16 +4,20 @@ const user = new mongoose.Schema({
   role: {
     type: String,
     required: true,
+    default: "",
   },
   phoneNumber: {
     type: String,
+    default: "",
   },
   email: {
     type: String,
+    default: "",
   },
   password: {
     type: String,
     required: true,
+    default: "",
   },
   availability: [
     {
@@ -24,33 +28,42 @@ const user = new mongoose.Schema({
   doctorInfo: {
     specialization: {
       type: String,
+      default: "",
     },
     degree: {
       type: String,
+      default: "",
     },
     experience: {
       type: String,
+      default: "",
     },
     description: {
       type: String,
+      default: "",
     },
   },
   info: {
     //personal info
     profileImg: {
       type: String,
+      default: "",
     },
     name: {
       type: String,
+      default: "",
     },
     dateOfBirth: {
       type: Date,
+      default: "",
     },
     phoneNumber: {
       type: String,
+      default: "",
     },
     biologicalGender: {
       type: String,
+      default: "",
     },
   },
   appointments: [
@@ -69,16 +82,21 @@ const user = new mongoose.Schema({
     {
       name: {
         type: String,
+        default: "",
+
         // required: true,
       },
       phoneNumber: {
         type: String,
+        default: "",
       },
       email: {
         type: String,
+        default: "",
       },
       relation: {
         type: String,
+        default: "",
       },
     },
   ],

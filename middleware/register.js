@@ -60,9 +60,14 @@ module.exports.patient = async (req, res) => {
       role: enums.role_patient,
     };
 
-  await new User(query)
+  const newUser = new User(query);
+
+  await newUser
     .save()
     .then(async (r) => {
+      delete r.availability;
+      delete r.schedule;
+      delete r.doctorInfo;
       if (email) {
         await sendMail(email, `Hello ${email}`, logs[20], email);
       }

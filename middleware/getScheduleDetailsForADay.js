@@ -31,19 +31,10 @@ module.exports.getScheduleDetailsForADay = async (req, res) => {
         {
           path: "patient",
           select: "email info",
-        //   populate: { 
-        //         path: "user", 
-        //         select: "email info",
-        //         populate:{
-        //             path: "info",
-        //             select: "name profileImg bilogicalGender"
-        //         } 
-            // },
         },
       ],
     })
     .sort({ "schedule.timeSlot.time.endTime": 1 })
-    // .exec()
     .then((r) => {
       if (r) return r;
       else return false;
