@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const appointment = new mongoose.Schema({
-  // data: {
   timeSlot: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "availability",
@@ -13,6 +12,10 @@ const appointment = new mongoose.Schema({
   chat: {
     type: Boolean,
     default: false,
+  },
+  chats: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "chats",
   },
   doctor: {
     type: mongoose.Schema.Types.ObjectId,
