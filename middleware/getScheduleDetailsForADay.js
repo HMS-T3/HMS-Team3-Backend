@@ -12,7 +12,6 @@ module.exports.getScheduleDetailsForADay = async (req, res) => {
   const doctorExist = await User.findOne({
     _id: doctor_id,
     role: enums.role_doctor,
-    // 'timeSlot': {$ne: null}
   })
     .populate({
       path: "schedule",
@@ -27,11 +26,12 @@ module.exports.getScheduleDetailsForADay = async (req, res) => {
         },
         {
           path: "doctor",
-          select: "email doctorInfo info ",
+          select: "email doctorInfo info",
         },
         {
           path: "patient",
           select: "email info ",
+          populate: { path: "user", select: "-_id -password -__v" },
         },
       ],
     })
