@@ -3,7 +3,7 @@ const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
 const specialization = require("../constants/specilization.js");
 const enums = require("../constants/enum");
- t
+
 module.exports.search = async (req, res) => {
   const { searchString } = req.query;
 
