@@ -21,6 +21,7 @@ router
   .get(routes.getAvailableTimeSlots, middleware.getAvailableTimeSlots)
   .get(routes.search, middleware.search)
   .get(routes.getScheduleDetailsForADay, middleware.getScheduleDetailsForADay)
+  .get(routes.addBulkAvailability, middleware.addBulkAvailability)
   //post
   .post(routes.upload, upload.single("file"), middleware.upload)
   .post(routes.loginPatient, middleware.login_patient)

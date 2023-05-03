@@ -16,9 +16,10 @@ module.exports.app = {
   dropTable: "/dropTable",
   updateSOSContacts: "/updateSOSContacts",
   getSOSContacts: "/getSOSContacts",
-  getAvailableTimeSlots: "/getAvailableTimeSlots", 
-  search: "/search",
   getScheduleDetailsForADay: "/getScheduleDetailsForADay",
+  getAvailableTimeSlots: "/getAvailableTimeSlots",
+  search: "/search",
+  addBulkAvailability: "/addBulkAvailability",
 };
 
 module.exports.test = {

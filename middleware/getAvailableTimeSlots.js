@@ -1,6 +1,6 @@
 const User = require("../handler/models").User;
 const enums = require("../constants/enum");
-const msgHandler = require("../functions/msgHandler")
+const msgHandler = require("../functions/msgHandler");
 
 module.exports.getAvailableTimeSlots = async (req, res, next) => {
   const { doctor_id, day, booked } = req.query;
@@ -19,9 +19,11 @@ module.exports.getAvailableTimeSlots = async (req, res, next) => {
         .map((a) => {
           return Object.values(a.time);
         });
-      res.status(200).json(msgHandler.pass(availability));
+      availability.length > 0
+        ? res.status(200).json(msgHandler.pass(availability))
+        : res.status(200).json(msgHandler.pass(null));
     })
     .catch((e) => {
-      res.status(200).json(msgHandler.fail("Some Error"))
+      res.status(200).json(msgHandler.fail("Some Error"));
     });
 };

@@ -37,11 +37,15 @@ let localMongoDbTest = "local-test";
 if (app.get("env") === "development") {
   // do something in local environment
   // dbLink = `mongodb://localhost:27017`;
-  dbLink = `mongodb+srv://${process.env.USERNAME_MONGO}:${process.env.PASSWORD_MONGO}@${process.env.CLUSTER_MONGO}/${process.env.DATABASE_NAME}`;
+  dbLink = `mongodb+srv://${process.env.USERNAME_MONGO}:${process.env.PASSWORD_MONGO}@${process.env.CLUSTER_MONGO}/${localMongoDbTest}`;
+  // dbLink = `mongodb+srv://${process.env.USERNAME_MONGO}:${process.env.PASSWORD_MONGO}@${process.env.CLUSTER_MONGO}/${process.env.DATABASE_NAME}`;
+
   console.log(msgHandler.pass("Local Environment"));
 } else {
   // do something in production environment
   dbLink = `mongodb+srv://${process.env.USERNAME_MONGO}:${process.env.PASSWORD_MONGO}@${process.env.CLUSTER_MONGO}/${process.env.DATABASE_NAME}`;
+  // dbLink = `mongodb+srv://${process.env.USERNAME_MONGO}:${process.env.PASSWORD_MONGO}@${process.env.CLUSTER_MONGO}/${localMongoDbTest}`;
+
   console.log(msgHandler.pass("Production Environment"));
 }
 

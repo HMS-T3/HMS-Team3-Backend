@@ -32,13 +32,12 @@ module.exports.getScheduleDetails = async (req, res) => {
       ],
     })
     .sort({ "schedule.timeSlot.time.endTime": 1 })
-    // .exec()
-    .then((r) => {
-      if (r) return r;
-      else return false;
-    })
-    .catch((e) => false);
-
-  if (!doctorExist) return res.status(200).json(msgHandler.fail("Error"));
-  else return res.status(200).json(msgHandler.pass(doctorExist.schedule));
+    .then((r) =>
+      r.schedule.length > 0
+        ? res.status(200).json(msgHandler.pass(r.schedule))
+        : res.status(200).json(msgHandler.pass(null))
+    )
+    .catch((e) => {
+      res.status(200).json(msgHandler.fail("Some Error"));
+    });
 };

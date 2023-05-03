@@ -8,6 +8,7 @@ const specialization = require("../constants/specilization.js");
 const sendMail = require("../functions/sendEmail");
 const phoneValidator = require("../functions/phoneValidator.js");
 const _ = require("lodash");
+const addAvailability = require("../functions/addAvailability");
 
 module.exports.patient = async (req, res) => {
   const { email, password, phoneNumber } = req.body;
@@ -65,6 +66,7 @@ module.exports.patient = async (req, res) => {
       if (email) {
         await sendMail(email, `Hello ${email}`, logs[20], email);
       }
+
       return res
         .status(200)
         .json(msgHandler.pass({ id: r.id, Message: logs[5] }));
@@ -83,6 +85,7 @@ module.exports.patient = async (req, res) => {
 module.exports.staff = async (req, res) => {
   const { email, password, role } = req.body;
   let { specializations } = req.body;
+  const { wantAddAvailability, day, from, to } = req.query;
   specializations = _.capitalize(specializations);
   if (role === enums.role_doctor) {
     if (!specializations) {
@@ -133,19 +136,30 @@ module.exports.staff = async (req, res) => {
     },
   })
     .save()
-    .then(async (r) => {
+    .then(async (rid) => {
+      wantAddAvailability === "true" &&
+        (await addAvailability(
+          `${req.protocol + "://" + req.get("host")}`,
+          rid.id,
+          day,
+          from,
+          to
+        ));
+
       await sendMail(
         email,
         `Hello ${email}`,
         "You have successfully logged in to your account.",
         email
       );
+
+      // console.log();
+
       return res
         .status(200)
-        .json(msgHandler.pass({ id: r._id, Message: logs[5] }));
+        .json(msgHandler.pass({ id: rid.id, Message: logs[5] }));
     })
     .catch((err) => {
-      // console.log("DVsdv", err);
       if (err) {
         if (err.code === 11000) {
           return res.status(409).json(msgHandler.fail(logs[9]));
