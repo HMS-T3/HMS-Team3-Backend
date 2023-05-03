@@ -21,7 +21,7 @@ module.exports.upload = async (req, res) => {
     .then(async (result) => {
       try {
         await fs.unlinkSync(req.file.path);
-        console.log("File deleted!");
+        // console.log("File deleted!");
       } catch (err) {
         console.error(err);
       }

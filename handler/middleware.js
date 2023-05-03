@@ -15,6 +15,7 @@ const updateSOSContacts = require("../middleware/updateSOSContacts");
 const getSOSContacts = require("../middleware/getSOSContacts");
 const getAvailableTimeSlots = require("../middleware/getAvailableTimeSlots");
 const search = require("../middleware/search");
+const getScheduleDetailsForADay = require("../middleware/getScheduleDetailsForADay");
 const addBulkAvailability = require("../middleware/addBulkAvailability");
 
 const middleware = {
@@ -37,6 +38,7 @@ const middleware = {
   getSOSContacts: getSOSContacts.getSOSContacts,
   getAvailableTimeSlots: getAvailableTimeSlots.getAvailableTimeSlots,
   search: search.search,
+  getScheduleDetailsForADay: getScheduleDetailsForADay.getScheduleDetailsForADay,
   addBulkAvailability: addBulkAvailability.addBulkAvailability,
 };
 
