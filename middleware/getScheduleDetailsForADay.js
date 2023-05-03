@@ -8,19 +8,19 @@ const msgHandler = require("../functions/msgHandler");
 
 module.exports.getScheduleDetailsForADay = async (req, res) => {
   const { doctor_id, populate, day } = req.query;
-  console.log(day)
+  console.log(day);
   const doctorExist = await User.findOne({
     _id: doctor_id,
     role: enums.role_doctor,
   })
     .populate({
       path: "schedule",
-    //   match: {"timeSlot.day": day },
+      //   match: {"timeSlot.day": day },
       select: "-_id -__v",
       populate: populate === "true" && [
         {
           path: "timeSlot",
-          match: {day: day },
+          match: { day: day },
           select: "-_id -__v",
           sort: { startTime: 1 },
         },
@@ -30,8 +30,15 @@ module.exports.getScheduleDetailsForADay = async (req, res) => {
         },
         {
           path: "patient",
-          select: "email info ",
-          populate: { path: "user", select: "-_id -password -__v" },
+          select: "email info",
+        //   populate: { 
+        //         path: "user", 
+        //         select: "email info",
+        //         populate:{
+        //             path: "info",
+        //             select: "name profileImg bilogicalGender"
+        //         } 
+            // },
         },
       ],
     })
