@@ -1,5 +1,6 @@
 const cloudinary = require("../functions/cloudinary.js");
 const fs = require("fs");
+const msgHandler = require("../functions/msgHandler.js");
 
 module.exports.upload = async (req, res) => {
   res.setHeader("Content-Type", "multipart/form-data");
@@ -11,7 +12,9 @@ module.exports.upload = async (req, res) => {
     req.file.mimetype !== "image/png" &&
     req.file.mimetype !== "image/gif"
   ) {
-    return res.send("Invalid file type");
+    return res
+      .status(200)
+      .json(msgHandler.fail({ Error: "Invalid file type" }));
   }
 
   await cloudinary(req.file.path)
@@ -22,9 +25,9 @@ module.exports.upload = async (req, res) => {
       } catch (err) {
         console.error(err);
       }
-      res.send(result);
+      res.status(200).json(msgHandler.pass({ Link: result }));
     })
     .catch((error) => {
-      res.send(error);
+      return res.status(200).json(msgHandler.fail(error));
     });
 };
