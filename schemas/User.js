@@ -57,10 +57,6 @@ const user = new mongoose.Schema({
       type: Date,
       default: "",
     },
-    phoneNumber: {
-      type: String,
-      default: "",
-    },
     biologicalGender: {
       type: String,
       default: "",

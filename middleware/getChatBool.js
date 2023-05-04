@@ -15,11 +15,11 @@ module.exports.getChatBool = async (req, res, next) => {
         populate: [
           {
             path: "patient",
-            select: "info.name info.email info.phoneNumber",
+            select: "info.name email phoneNumber",
           },
           {
             path: "doctor",
-            select: "info.name info.email info.phoneNumber",
+            select: "info.name email phoneNumber",
           },
           //   {
           //     path: "timeSlot",
