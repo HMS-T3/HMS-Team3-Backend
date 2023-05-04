@@ -29,7 +29,11 @@ module.exports.getScheduleDetailsForADay = async (req, res) => {
     .then((r) => {
       if (r) {
         let schedule = r.schedule.filter((a) => a.timeSlot.day === day);
-        return res.status(200).json(msgHandler.pass(schedule));
+        if (schedule.length === 0)
+          return res
+            .status(200)
+            .json(msgHandler.fail("No schedule for this day"));
+        else return res.status(200).json(msgHandler.pass(schedule));
       } else {
         return false;
       }
