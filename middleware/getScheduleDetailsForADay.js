@@ -29,7 +29,7 @@ module.exports.getScheduleDetailsForADay = async (req, res) => {
     .then((r) => {
       if (r) {
         let schedule = r.schedule.filter((a) => a.timeSlot.day === day);
-        return res.status(200).json(schedule);
+        return res.status(200).json(msgHandler.pass(schedule));
       } else {
         return false;
       }
