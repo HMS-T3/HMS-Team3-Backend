@@ -88,7 +88,7 @@ module.exports.bookAppointment = async (req, res) => {
                     },
                     patientUpdate
                   )
-                    .then((r) => true)
+                    .then(async (r) => {true})
                     .catch((e) => false);
                   if (patientUpdateMsg) {
                     await User.findOneAndUpdate(
@@ -97,9 +97,15 @@ module.exports.bookAppointment = async (req, res) => {
                       },
                       doctorUpdate
                     )
-                      .then((r) =>
+                      .then(async (r) => {
+                        if(doctorUser.email){
+                          await sendMail(doctorUser.email, `Hello ${doctorUser.email}`, "An appointment has been successfully booked.", doctorUser.email);
+                        }
+                        if(patientUser.email){
+                          await sendMail(patientUser.email, `Hello ${patientUser.email}`, "An appointment has been successfully booked.", patientUser.email);
+                        }
                         res.status(200).json(msgHandler.pass(logs[15]))
-                      )
+                  })
                       .catch((e) => res.status(200).json(msgHandler.fail(e)));
                   } else {
                     return res
