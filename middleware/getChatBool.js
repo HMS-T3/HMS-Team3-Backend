@@ -15,11 +15,11 @@ module.exports.getChatBool = async (req, res, next) => {
         populate: [
           {
             path: "patient",
-            select: "info.name email phoneNumber",
+            select: "info.name info.profileImg email phoneNumber ",
           },
           {
             path: "doctor",
-            select: "info.name email phoneNumber",
+            select: "info.name info.profileImg email phoneNumber",
           },
           //   {
           //     path: "timeSlot",
@@ -37,10 +37,10 @@ module.exports.getChatBool = async (req, res, next) => {
 
         return res.status(200).json(msgHandler.pass(filterUser));
       } else {
-        return res.status(200).json(msgHandler.fail("User not found"));
+        return res.status(200).json(msgHandler.fail([]));
       }
     })
     .catch((err) => {
-      return res.status(200).json(msgHandler.fail("Error"));
+      return res.status(200).json(msgHandler.fail([]));
     });
 };
