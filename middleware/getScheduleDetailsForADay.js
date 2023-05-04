@@ -16,30 +16,30 @@ module.exports.getScheduleDetailsForADay = async (req, res) => {
     .populate({
       path: "schedule",
       //   match: {"timeSlot.day": day },
-      select: "-_id -__v",
+      // select: "-_id -__v",
       populate: populate === "true" && [
         {
           path: "timeSlot",
           // match: { day: day },
-          select: "-_id -__v",
-          sort: { startTime: 1 },
+          // select: "-_id -__v",
+          // sort: { startTime: 1 },
         },
         {
           path: "doctor",
-          select: "email doctorInfo info",
+          // select: "email doctorInfo info",
         },
         {
           path: "patient",
-          select: "email info",
+          // select: "email info",
         },
       ],
     })
-    .sort({ "schedule.timeSlot.time.endTime": 1 })
+    // .sort({ "schedule.timeSlot.time.endTime": 1 })
     .then((r) => {
       console.log(r)
       let schedule = r.schedule
         .filter((a) => a.timeSlot.day === day)
-        return schedule
+        .map((a)=>{return schedule})
     })
     .catch((e) => false);
 
