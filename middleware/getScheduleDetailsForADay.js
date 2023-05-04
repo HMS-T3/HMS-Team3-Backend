@@ -32,7 +32,7 @@ module.exports.getScheduleDetailsForADay = async (req, res) => {
         if (schedule.length === 0)
           return res
             .status(200)
-            .json(msgHandler.fail("No schedule for this day"));
+            .json(msgHandler.fail(null));
         else return res.status(200).json(msgHandler.pass(schedule));
       } else {
         return false;
