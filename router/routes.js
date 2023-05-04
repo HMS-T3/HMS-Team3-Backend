@@ -21,6 +21,7 @@ module.exports.app = {
   search: "/search",
   addBulkAvailability: "/addBulkAvailability",
   makeChatTrue: "/makeChatTrue",
+  getLabtests: "/getLabtests"
   getMedicine: "/getMedicine",
 };
 

@@ -18,6 +18,7 @@ const search = require("../middleware/search");
 const getScheduleDetailsForADay = require("../middleware/getScheduleDetailsForADay");
 const addBulkAvailability = require("../middleware/addBulkAvailability");
 const makeChatTrue = require("../middleware/makeChatTrue");
+const getLabTests = require("../middleware/getLabTests");
 const getMedicine = require("../middleware/getMedicine");
 const middleware = {
   home: home.home,
@@ -43,6 +44,7 @@ const middleware = {
     getScheduleDetailsForADay.getScheduleDetailsForADay,
   addBulkAvailability: addBulkAvailability.addBulkAvailability,
   makeChatTrue: makeChatTrue.makeChatTrue,
+  getLabTests: getLabTests.getLabTests,
   getMedicine: getMedicine.getMedicine,
 };
 
