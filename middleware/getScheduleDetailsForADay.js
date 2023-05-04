@@ -20,7 +20,7 @@ module.exports.getScheduleDetailsForADay = async (req, res) => {
       populate: populate === "true" && [
         {
           path: "timeSlot",
-          match: { day: day },
+          // match: { day: day },
           select: "-_id -__v",
           sort: { startTime: 1 },
         },
@@ -36,8 +36,9 @@ module.exports.getScheduleDetailsForADay = async (req, res) => {
     })
     .sort({ "schedule.timeSlot.time.endTime": 1 })
     .then((r) => {
-      if (r) return r;
-      else return false;
+      let schedule = r.schedule
+        .filter((a) => a.day === day)
+        return schedule
     })
     .catch((e) => false);
 
