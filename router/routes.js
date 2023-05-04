@@ -10,6 +10,7 @@ module.exports.app = {
   get_appointment_details: "/get_appointment_details",
   get_schedule_details: "/get_schedule_details",
   getSpecialization: "/get_specializations",
+  getMedicine: "/get_medicine",
   getDoctors: "/get_doctors",
   upload: "/upload",
   addAvailability: "/addAvailability",
