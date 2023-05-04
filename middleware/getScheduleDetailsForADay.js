@@ -1,6 +1,4 @@
-// const Appointment = require("../handler/models.js").Appointment;
 const User = require("../handler/models.js").User;
-const Availability = require("../handler/models.js").Availability;
 const enums = require("../constants/enum.js");
 
 const logs = require("../logs/logs");
@@ -15,32 +13,29 @@ module.exports.getScheduleDetailsForADay = async (req, res) => {
   })
     .populate({
       path: "schedule",
-      //   match: {"timeSlot.day": day },
-      select: "-_id -__v",
       populate: populate === "true" && [
         {
           path: "timeSlot",
-          match: { day: day },
-          select: "-_id -__v",
-          sort: { startTime: 1 },
         },
         {
           path: "doctor",
-          select: "email doctorInfo info",
         },
         {
           path: "patient",
-          select: "email info",
         },
       ],
     })
     .sort({ "schedule.timeSlot.time.endTime": 1 })
     .then((r) => {
-      if (r) return r;
-      else return false;
+      if (r) {
+        let schedule = r.schedule.filter((a) => a.timeSlot.day === day);
+        return res.status(200).json(schedule);
+      } else {
+        return false;
+      }
     })
     .catch((e) => false);
 
   if (!doctorExist) return res.status(200).json(msgHandler.fail("Error"));
-  else return res.status(200).json(msgHandler.pass(doctorExist.schedule));
+  // else return res.status(200).json(msgHandler.pass(doctorExist.schedule));
 };
