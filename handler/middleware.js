@@ -18,7 +18,7 @@ const search = require("../middleware/search");
 const getScheduleDetailsForADay = require("../middleware/getScheduleDetailsForADay");
 const addBulkAvailability = require("../middleware/addBulkAvailability");
 const makeChatTrue = require("../middleware/makeChatTrue");
-
+const getMedicine = require("../middleware/getMedicine");
 const middleware = {
   home: home.home,
   login_patient: login.patient,
@@ -43,6 +43,7 @@ const middleware = {
     getScheduleDetailsForADay.getScheduleDetailsForADay,
   addBulkAvailability: addBulkAvailability.addBulkAvailability,
   makeChatTrue: makeChatTrue.makeChatTrue,
+  getMedicine: getMedicine.getMedicine,
 };
 
 module.exports = middleware;
