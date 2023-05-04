@@ -15,6 +15,7 @@ router
   .get(routes.get_appointment_details, middleware.get_appointment_details)
   .get(routes.get_schedule_details, middleware.get_schedule_details)
   .get(routes.getSpecialization, middleware.getSpecialization)
+  .get(routes.getMedicine, middleware.getMedicine)
   .get(routes.getDoctors, middleware.getDoctors)
   .get(routes.dropTable, middleware.dropTable)
   .get(routes.getSOSContacts, middleware.getSOSContacts)
@@ -23,6 +24,7 @@ router
   .get(routes.getScheduleDetailsForADay, middleware.getScheduleDetailsForADay)
   .get(routes.addBulkAvailability, middleware.addBulkAvailability)
   .get(routes.getLabtests, middleware.getLabTests)
+  .get(routes.getChatBool, middleware.getChatBool)
   //post
   .post(routes.upload, upload.single("file"), middleware.upload)
   .post(routes.loginPatient, middleware.login_patient)

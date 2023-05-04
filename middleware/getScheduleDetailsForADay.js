@@ -27,12 +27,15 @@ module.exports.getScheduleDetailsForADay = async (req, res) => {
     })
     .sort({ "schedule.timeSlot.time.endTime": 1 })
     .then((r) => {
-      console.log(r);
-      let schedule = r.schedule.filter((a) => a.timeSlot.day === day);
-      res.send(schedule);
+      if (r) {
+        let schedule = r.schedule.filter((a) => a.timeSlot.day === day);
+        return res.status(200).json(schedule);
+      } else {
+        return false;
+      }
     })
     .catch((e) => false);
 
   if (!doctorExist) return res.status(200).json(msgHandler.fail("Error"));
-  else return res.status(200).json(msgHandler.pass(doctorExist.schedule));
+  // else return res.status(200).json(msgHandler.pass(doctorExist.schedule));
 };

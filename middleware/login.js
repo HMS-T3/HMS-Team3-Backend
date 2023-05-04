@@ -4,7 +4,7 @@ const hash = require("../functions/hash");
 const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
 const emailValidator = require("../functions/emailValidator");
-const sendMail = require("../functions/sendEmail");
+// const sendMail = require("../functions/sendEmail");
 const phoneValidator = require("../functions/phoneValidator.js");
 
 module.exports.patient = async (req, res) => {
@@ -65,7 +65,7 @@ module.exports.patient = async (req, res) => {
 
 module.exports.staff = async (req, res) => {
   const { email, password, role } = req.body;
-  if (!(emailValidator(email))) {
+  if (!emailValidator(email)) {
     return res.status(200).json(msgHandler.fail(logs[11]));
   }
   if (password.length < 7) {
@@ -80,7 +80,7 @@ module.exports.staff = async (req, res) => {
     .then(async (user) => {
       if (user) {
         if (user.password === hashed_password) {
-          await sendMail(email, `Hello ${email}`, logs[20], email);
+          // await sendMail(email, `Hello ${email}`, logs[20], email);
           return res
             .status(200)
             .json(msgHandler.pass({ id: user.id, Message: logs[5] }));
