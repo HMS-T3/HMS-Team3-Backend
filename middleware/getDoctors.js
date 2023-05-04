@@ -2,6 +2,7 @@ const Doctors = require("../handler/models").User;
 const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
 const enums = require("../constants/enum");
+const _ = require('lodash');
 
 module.exports.getDoctors = async (req, res) => {
   const { Specializations } = req.query;
@@ -21,7 +22,7 @@ module.exports.getDoctors = async (req, res) => {
   ])
     .then((r) =>
       r || r !== []
-        ? res.status(200).json(msgHandler.pass(r))
+        ? res.status(200).json(msgHandler.pass(_.shuffle(r)))
         : res.status(200).json(msgHandler.fail(logs[19]))
     )
     .catch((e) => res.status(200).json(msgHandler.fail(e)));
