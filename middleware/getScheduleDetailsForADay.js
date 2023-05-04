@@ -36,8 +36,9 @@ module.exports.getScheduleDetailsForADay = async (req, res) => {
     })
     .sort({ "schedule.timeSlot.time.endTime": 1 })
     .then((r) => {
+      console.log(r)
       let schedule = r.schedule
-        .filter((a) => a.day === day)
+        .filter((a) => a.timeSlot.day === day)
         return schedule
     })
     .catch((e) => false);
