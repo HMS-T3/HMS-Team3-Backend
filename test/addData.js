@@ -7,6 +7,7 @@ const addAvailability = require("../functions/addAvailability");
 const doctorImages = require("../constants/doctors");
 const phoneNumbers = require("../constants/phoneNumber");
 const _ = require("lodash");
+const names = require("../constants/names");
 
 function removeUnderscore(str) {
   return str.replace(/_/g, " ");
@@ -17,25 +18,35 @@ function removeSeparators(str) {
 }
 
 module.exports.addUsers = async (req, res) => {
-  const { nums, userR, wantAddAvailability, day, from, to } = req.query;
+  const {
+    nums,
+    userR,
+    wantAddAvailability,
+    fromDate,
+    toDate,
+    fromTime,
+    toTime,
+  } = req.query;
 
   const response = await axios
     .get(`https://randomuser.me/api/?results=${nums}`)
     .then((r) => {
+      // console.log("R", r);
       return r.data["results"];
     })
     .catch((e) => {
+      // console.log("Error", e);
       return e;
     });
   let flag = false;
 
-  console.log("response", response);
-
+  // console.log("response", response);
   for (let i = 0; i < response.length; i++) {
     const randomSpec = specialization.map((e) => e.specialization)[
       Math.floor(Math.random() * specialization.length)
     ];
     // console.log(response[i]["login"]["sha256"]);
+
     let obj = new Object();
     if (userR === "doctor")
       obj["doctorInfo"] = {
@@ -47,34 +58,56 @@ module.exports.addUsers = async (req, res) => {
       };
 
     obj["email"] = response[i]["email"];
-    obj["phoneNumber"] = _.random(phoneNumbers);
+    obj["phoneNumber"] = _.sample(phoneNumbers);
 
     obj["role"] = userR;
-    let fname =
-      response[i]["name"]["first"] + " " + response[i]["name"]["last"];
+    let fname = _.sample(names) + " " + response[i]["name"]["last"];
     if (userR === "doctor") fname = "Dr. " + fname;
     obj["info"] = {
-      profileImg: _.random(doctorImages.imgUrl),
+      profileImg:
+        userR === "doctor"
+          ? _.sample(doctorImages).imgUrl
+          : response[i]["picture"]["large"],
       name: fname,
       dateOfBirth: response[i]["dob"]["date"],
       biologicalGender: response[i]["gender"],
     };
-    obj["password"] = hash("password");
+    obj["password"] = await hash("password");
     console.log("Object is: ", obj);
     const user = new User(obj);
     await user
       .save()
       .then(async (r) => {
-        wantAddAvailability === "true" &&
-          (await addAvailability(
-            `${req.protocol + "://" + req.get("host")}`,
-            r.id,
-            day,
-            from,
-            to
-          ));
+        if (wantAddAvailability === "true" && userR === "doctor") {
+          const startDate = new Date(fromDate);
+          const endDate = new Date(toDate);
+          let currentDate = startDate;
+          try {
+            while (currentDate <= endDate) {
+              const day = currentDate.getDate().toString().padStart(2, "0");
+              const month = (currentDate.getMonth() + 1)
+                .toString()
+                .padStart(2, "0");
+              const year = currentDate.getFullYear().toString();
 
-        flag = true;
+              await addAvailability(
+                `${req.protocol + "://" + req.get("host")}`,
+                r.id,
+                `${day}-${month}-${year}`,
+                fromTime,
+                toTime
+              );
+              // console.log(`${day}-${month}-${year}`);
+
+              currentDate.setDate(currentDate.getDate() + 1);
+            }
+            flag = true;
+          } catch (e) {
+            res.status(200).json(msgHandler.fail(e));
+          }
+        } else {
+          res.send("Fail");
+        }
       })
       .catch((e) => res.send(e));
   }

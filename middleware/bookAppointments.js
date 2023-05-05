@@ -1,6 +1,7 @@
 const User = require("../handler/models.js").User;
 const Appointment = require("../handler/models.js").Appointment;
 const Availability = require("../handler/models.js").Availability;
+const sendEmail = require("../functions/sendEmail");
 
 const enums = require("../constants/enum.js");
 const logs = require("../logs/logs");
@@ -97,9 +98,21 @@ module.exports.bookAppointment = async (req, res) => {
                       },
                       doctorUpdate
                     )
-                      .then((r) =>
-                        res.status(200).json(msgHandler.pass(logs[15]))
-                      )
+                      .then(async (r) => {
+                        await sendEmail(
+                          patientUser.email,
+                          "Appointment Booked",
+                          `Your Appointment has been booked with ${doctorUser.name} on ${day} from ${startTime} to ${endTime}`,
+                          patientUser.info.name
+                        );
+                        await sendEmail(
+                          doctorUser.email,
+                          "Appointment Booked",
+                          `Your Appointment has been booked with ${patientUser.name} on ${day} from ${startTime} to ${endTime}`,
+                          doctorUser.info.name
+                        );
+                        return res.status(200).json(msgHandler.pass(logs[15]));
+                      })
                       .catch((e) => res.status(200).json(msgHandler.fail(e)));
                   } else {
                     return res
