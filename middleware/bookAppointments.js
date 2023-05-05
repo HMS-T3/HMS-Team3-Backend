@@ -5,6 +5,7 @@ const Availability = require("../handler/models.js").Availability;
 const enums = require("../constants/enum.js");
 const logs = require("../logs/logs");
 const msgHandler = require("../functions/msgHandler");
+const sendSMS = require('../functions/sendSMS');
 
 module.exports.bookAppointment = async (req, res) => {
   const { doctor_id, reason, day, startTime, endTime } = req.body;
@@ -98,11 +99,13 @@ module.exports.bookAppointment = async (req, res) => {
                       doctorUpdate
                     )
                       .then(async (r) => {
-                        if(doctorUser.email){
-                          await sendMail(doctorUser.email, `Hello ${doctorUser.email}`, "An appointment has been successfully booked.", doctorUser.email);
+                        if(patientUser.phoneNumber){
+                          console.log(patientUser.phoneNumber)
+                          sendSMS(patientUser.phoneNumber,"Your appointment is booked");
                         }
-                        if(patientUser.email){
-                          await sendMail(patientUser.email, `Hello ${patientUser.email}`, "An appointment has been successfully booked.", patientUser.email);
+                        if(doctorUser.phoneNumber){
+                          console.log(doctorUser.phoneNumber)
+                          sendSMS(doctorUser.phoneNumber,"An appointment for you is booked");
                         }
                         res.status(200).json(msgHandler.pass(logs[15]))
                   })
