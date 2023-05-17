@@ -17,7 +17,7 @@ module.exports.fail = (msg) => {
   } else {
     return {
       Response: msg,
-      Status: logs.pass,
+      Status: logs.fail,
     };
   }
 };
