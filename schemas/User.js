@@ -101,4 +101,16 @@ const user = new mongoose.Schema({
     default: Date.now,
   },
 });
+// Define a pre-save hook to conditionally remove the "doctorInfo" field if "role" is not "Doctor"
+user.pre("save", function (next) {
+  if (this.role === "patient") {
+    this.doctorInfo = undefined;
+    this.schedule = undefined;
+    this.availability = undefined;
+  }else if(this.role === "doctor"){
+    this.appointments = undefined;
+    this.emergencyContacts = undefined;
+  }
+  next();
+});
 module.exports = mongoose.model("users", user);
